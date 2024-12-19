@@ -1,0 +1,40 @@
+:root {
+  --sunset-yellow: #FFB84D;
+  --sunset-orange: #d88200;
+  --dark-gray: #1A1A1A;
+  --text-light: #F9F4E7;
+}
+.bg-dark-gray,
+.hover\:bg-dark-gray:hover {
+  background-color: var(--dark-gray);
+}
+.bg-sunset-yellow,
+.hover\:bg-sunset-yellow:hover {
+  background-color: var(--sunset-yellow);
+}
+.bg-sunset-orange,
+.hover\:bg-sunset-orange:hover {
+  background-color: var(--sunset-orange);
+}
+.text-text-light,
+.hover\:.text-text-light:hover {
+  color: var(--text-light);
+}
+.text-sunset-yellow,
+.hover\:text-sunset-yellow:hover {
+  color: var(--sunset-yellow);
+}
+.text-text-orange,
+.hover\:text-sunset-orange:hover {
+  color: var(--sunset-orange);
+}
+
+/* Header */
+.logo {
+  height: 35px
+}
+
+/* Body */
+.site-notification {
+  padding: 2rem 2rem 0 2rem
+}

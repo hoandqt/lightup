@@ -1,0 +1,20 @@
+{
+  "1": {
+      "name": "Light Up Ambience",
+      "channel_type": "Sounds",
+      "handle": "lightup.tv_ambience",
+      "channel_description": "Welcome to Light Up Ambience channel, where you’ll find calming ambience videos with soothing sounds designed to help you relax, meditate, sleep, or focus while working. If you need a peaceful backdrop for your day or a serene escape, don't hesitate to search my channel for the perfect atmosphere to ease your mind and body."
+  },
+  "2": {
+      "name": "Rhythmic Retreat",
+      "channel_type": "Sounds",
+      "handle": "RhythmicRetreat",
+      "channel_description": "Nature sounds, meditaion sounds, soft music."
+  },
+  "3": {
+    "name": "Relaxing Sounds Natural",
+    "channel_type": "Sounds",
+    "handle": "RelaxingSoundsNatural74",
+    "channel_description": "Relaxing sounds, Nature sounds, jazz music."
+  }
+}

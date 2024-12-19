@@ -1,0 +1,12 @@
+{
+  "1": {
+      "name": "Nature Sounds",
+      "channel_description": "",
+      "path_alias": "nature-sounds"
+  },
+  "2": {
+      "name": "Christmas Ambience",
+      "channel_description": "",
+      "path_alias": "christmas-ambience"
+  }
+}

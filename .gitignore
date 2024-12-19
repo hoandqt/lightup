@@ -1,0 +1,14 @@
+# Ignore log folder
+log/
+
+# Ignore lightup-web folder
+lightup-web/
+
+# Ignore helper folder
+helper/
+
+# Ignore the .git folder (although this is usually not necessary since .git is ignored by default)
+.git/
+
+# Ignore the .env file
+.env

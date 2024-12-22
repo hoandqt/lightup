@@ -35,6 +35,28 @@
 }
 
 /* Body */
+a,
+a:visited {
+  color: var(--sunset-yellow);
+}
+a:focus,
+a:hover {
+  color: var(--sunset-orange);
+}
 .site-notification {
   padding: 2rem 2rem 0 2rem
+}
+#welcome-image {
+  max-height: 600px;
+}
+
+/* Elements */
+.btn, .btn:visited, .btn:hover {
+  color: inherit
+}
+.edit-btn {
+  background-color: rgb(79 70 229 / var(--tw-bg-opacity, 1));
+}
+.delete-btn {
+  background-color: rgb(220 38 38 / var(--tw-bg-opacity, 1));
 }

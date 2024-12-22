@@ -37,6 +37,34 @@ $cssVersion = $debug ? '?v=' . rand(1000, 9999) : '';
       }
     }
 
+    function deleteThumbnail(uniqueId) {
+      if (!confirm("Are you sure you want to delete this thumbnail?")) {
+        return;
+      }
+
+      fetch('delete-thumbnail', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ unique_id: uniqueId })
+      })
+        .then(response => response.json())
+        .then(data => {
+          if (data.success) {
+            alert('Thumbnail deleted successfully!');
+            document.getElementById('download-thumbnail-checkbox').checked = false;
+            location.reload(); // Reload the page to update the UI
+          } else {
+            alert('Failed to delete thumbnail: ' + data.message);
+          }
+        })
+        .catch(error => {
+          console.error('Error deleting thumbnail:', error);
+          alert('An unexpected error occurred.');
+        });
+    }
+
     function fetchYouTubeThumbnail() {
       const videoLink = document.getElementById('video_link').value; // Get video link
       const thumbnailImg = document.getElementById('youtube-thumbnail');
@@ -53,16 +81,16 @@ $cssVersion = $debug ? '?v=' . rand(1000, 9999) : '';
         thumbnailImg.classList.remove('hidden');
 
         // Auto-download thumbnail (optional)
-        fetch(thumbnailUrl)
+        fetch(thumbnailUrl, { mode: 'no-cors' })
           .then(response => response.blob())
           .then(blob => {
-            const file = new File([blob], "youtube_thumbnail.jpg", { type: "image/jpeg" });
+            const file = new File([blob], "thumbnail_youtube.jpg", { type: "image/jpeg" });
             const dataTransfer = new DataTransfer();
             dataTransfer.items.add(file);
             document.getElementById('thumbnail').files = dataTransfer.files;
           })
           .catch(err => {
-            //alert("Failed to fetch the thumbnail. It may not be available.");
+            console.log("Failed to fetch the thumbnail. It may not be available.");
             console.error(err);
           });
       } else {
@@ -102,9 +130,11 @@ $cssVersion = $debug ? '?v=' . rand(1000, 9999) : '';
         if (thumbnailUrl) {
           const thumbnailImage = document.getElementById('youtube-thumbnail');
           const thumbnailLink = document.getElementById('thumbnail-download-link');
+          const inputthumbnailUrl = document.getElementById('youtube-thumbnail-url');
 
           thumbnailImage.src = thumbnailUrl;
           thumbnailLink.href = thumbnailUrl; // Set download link
+          inputthumbnailUrl.value = thumbnailUrl; // Set the hidden value of youtube thumbnail url
           thumbnailLink.classList.remove('hidden');
         }
 
@@ -149,7 +179,7 @@ $cssVersion = $debug ? '?v=' . rand(1000, 9999) : '';
           };
 
           // Send new data to server for updating
-          await fetch('update-channel.php', {
+          await fetch('update-channel', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ id: newId, data: newChannel })
@@ -175,11 +205,83 @@ $cssVersion = $debug ? '?v=' . rand(1000, 9999) : '';
       }
     }
 
+    document.addEventListener('DOMContentLoaded', () => {
+      // Close the dropdown of clicking outside
+      const dropdownButton = document.getElementById('dropdownButton');
+      const dropdownMenu = document.getElementById('dropdownMenu');
+
+      if (dropdownButton && dropdownMenu) {
+        // Toggle dropdown visibility
+        dropdownButton.addEventListener('click', (event) => {
+          dropdownMenu.classList.toggle('hidden');
+          event.stopPropagation(); // Prevent the event from bubbling up to the document
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', () => {
+          if (!dropdownMenu.classList.contains('hidden')) {
+            dropdownMenu.classList.add('hidden');
+          }
+        });
+
+        // Optional: Close dropdown when pressing the Escape key
+        document.addEventListener('keydown', (event) => {
+          if (event.key === 'Escape') {
+            dropdownMenu.classList.add('hidden');
+          }
+        });
+      }
+    });
+
+    let deleteUniqueId = '';
+
+    function showDeleteModal(uniqueId) {
+      deleteUniqueId = uniqueId;
+      document.getElementById('deleteModal').classList.remove('hidden');
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+
+      if (document.getElementById('cancelDelete')) {
+        document.getElementById('cancelDelete').addEventListener('click', () => {
+            document.getElementById('deleteModal').classList.add('hidden');
+        });
+      }
+
+      if (document.getElementById('confirmDelete')) {
+        document.getElementById('confirmDelete').addEventListener('click', () => {
+            fetch('delete-video', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ unique_id: deleteUniqueId })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('Video deleted successfully!');
+                    location.reload();
+                } else {
+                    alert('Error deleting video: ' + data.message);
+                }
+            })
+            .catch(error => {
+                alert('An error occurred.');
+                console.error(error);
+            });
+
+            document.getElementById('deleteModal').classList.add('hidden');
+        });
+      }
+
+    });
+
   </script>
 
   <script src="https://cdn.tailwindcss.com"></script>
 
-  <link rel="stylesheet" href="css/style.css<?= $cssVersion; ?>">
+  <link rel="stylesheet" href="/css/style.css<?= $cssVersion; ?>">
 </head>
 
 <body class="bg-dark-gray text-text-light">

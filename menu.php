@@ -1,22 +1,22 @@
 <nav class="bg-dark-gray border-b border-gray-700">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex items-center justify-between h-16">
-      <a href="index.php" class="text-sunset-yellow text-xl font-bold">
-        <img src="images/white-logo.png" width="" height="38" class="logo" />
+      <a href="/" class="text-sunset-yellow text-xl font-bold">
+        <img src="/images/white-logo.png" width="" height="38" class="logo" />
       </a>
       <!-- Desktop Menu -->
       <div class="hidden md:flex space-x-4">
-        <a href="index.php" class="text-text-light hover:text-sunset-yellow px-3 py-2 rounded-md text-sm font-medium">Home</a>
-        <a href="about.php" class="text-text-light hover:text-sunset-yellow px-3 py-2 rounded-md text-sm font-medium">About</a>
-        <a href="videos.php" class="text-text-light hover:text-sunset-yellow px-3 py-2 rounded-md text-sm font-medium">Videos</a>
-        <a href="contact.php" class="text-text-light hover:text-sunset-yellow px-3 py-2 rounded-md text-sm font-medium">Contact</a>
+        <a href="/" class="text-text-light hover:text-sunset-yellow px-3 py-2 rounded-md text-sm font-medium">Home</a>
+        <a href="/about" class="text-text-light hover:text-sunset-yellow px-3 py-2 rounded-md text-sm font-medium">About</a>
+        <a href="/videos" class="text-text-light hover:text-sunset-yellow px-3 py-2 rounded-md text-sm font-medium">Videos</a>
+        <a href="/contact" class="text-text-light hover:text-sunset-yellow px-3 py-2 rounded-md text-sm font-medium">Contact</a>
         
         <!-- Conditionally Add "Add Video" and Auth Buttons -->
         <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true): ?>
-          <a href="add-video.php" class="text-text-light hover:text-sunset-yellow px-3 py-2 rounded-md text-sm font-medium">Add Video</a>
-          <a href="logout.php" class="text-red-500 hover:text-sunset-yellow px-3 py-2 rounded-md text-sm font-medium">Log Out</a>
+          <a href="/add-video" class="text-text-light hover:text-sunset-yellow px-3 py-2 rounded-md text-sm font-medium">Add Video</a>
+          <a href="/logout" class="text-red-500 hover:text-sunset-yellow px-3 py-2 rounded-md text-sm font-medium">Log Out</a>
         <?php else: ?>
-          <a href="login.php" class="text-text-light hover:text-sunset-yellow px-3 py-2 rounded-md text-sm font-medium">Log In</a>
+          <a href="/login" class="text-text-light hover:text-sunset-yellow px-3 py-2 rounded-md text-sm font-medium">Log In</a>
         <?php endif; ?>
       </div>
 
@@ -33,17 +33,17 @@
 
   <!-- Mobile Menu -->
   <div id="mobile-menu" class="hidden md:hidden space-y-1 px-3 py-2">
-    <a href="index.php" class="block text-text-light hover:bg-sunset-yellow px-3 py-2 rounded-md">Home</a>
-    <a href="about.php" class="block text-text-light hover:bg-sunset-yellow px-3 py-2 rounded-md">About</a>
-    <a href="videos.php" class="block text-text-light hover:bg-sunset-yellow px-3 py-2 rounded-md">Videos</a>
-    <a href="contact.php" class="block text-text-light hover:bg-sunset-yellow px-3 py-2 rounded-md">Contact</a>
+    <a href="/" class="block text-text-light hover:bg-sunset-yellow px-3 py-2 rounded-md">Home</a>
+    <a href="/about" class="block text-text-light hover:bg-sunset-yellow px-3 py-2 rounded-md">About</a>
+    <a href="/videos" class="block text-text-light hover:bg-sunset-yellow px-3 py-2 rounded-md">Videos</a>
+    <a href="/contact" class="block text-text-light hover:bg-sunset-yellow px-3 py-2 rounded-md">Contact</a>
     
     <!-- Conditionally Add "Add Video" and Auth Buttons -->
     <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true): ?>
-      <a href="add-video.php" class="block text-text-light hover:bg-sunset-yellow px-3 py-2 rounded-md">Add Video</a>
-      <a href="logout.php" class="block text-red-500 hover:bg-sunset-yellow px-3 py-2 rounded-md">Log Out</a>
+      <a href="/add-video" class="block text-text-light hover:bg-sunset-yellow px-3 py-2 rounded-md">Add Video</a>
+      <a href="/logout" class="block text-red-500 hover:bg-sunset-yellow px-3 py-2 rounded-md">Log Out</a>
     <?php else: ?>
-      <a href="login.php" class="block text-text-light hover:bg-sunset-yellow px-3 py-2 rounded-md">Log In</a>
+      <a href="/login" class="block text-text-light hover:bg-sunset-yellow px-3 py-2 rounded-md">Log In</a>
     <?php endif; ?>
   </div>
 </nav>

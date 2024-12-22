@@ -1,16 +1,19 @@
 <?php
 session_start();
 
+require_once "functions.php";
+
 $pageTitle = "Welcome to LightUp.TV";
 $pageDescription = "Explore the homepage of LightUp.TV, featuring relaxing videos, soothing sounds, and creative content for your mindfulness journey.";
 $pageKeywords = "LightUp.TV, ambience videos, relaxing music, mindfulness, meditation, creative sounds";
 $canonicalURL = "https://www.lightup.tv/";
 include 'header.php';
 include 'menu.php';
+include 'sub-heading.php';
 ?>
 
 <!-- Hero Section -->
-<div class="relative bg-dark-gray overflow-hidden z-0">
+<div class="relative bg-dark-gray overflow-hidden z-0" id="welcome-info">
   <div class="max-w-7xl mx-auto">
     <div class="relative z-10 bg-dark-gray pb-8 sm:pb-16 md:pb-20 lg:max-w-2xl lg:w-full lg:pb-28 xl:pb-32">
       <main class="mt-10 mx-auto max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8">
@@ -34,7 +37,7 @@ include 'menu.php';
           </p>
           <div class="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
             <div class="rounded-md shadow">
-              <a href="https://www.youtube.com/channel/UCq7ctxkWd26rYXN4yv7mNTQ/"
+              <a href="#"
                 class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-dark-gray bg-sunset-orange md:py-4 md:text-lg md:px-10">
                 Get Started
               </a>
@@ -53,7 +56,7 @@ include 'menu.php';
 </div>
 
 <!-- Background Image -->
-<div class="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2 z-10 mt-40">
+<div class="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2 z-10 mt-40" id="welcome-image">
   <img class="h-56 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full" src="images/background.webp"
     alt="Welcome Image">
 </div>

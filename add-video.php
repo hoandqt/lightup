@@ -16,6 +16,7 @@ $pageKeywords = "";
 $canonicalURL = "https://www.lightup.tv/add-video.php";
 include 'header.php';
 include 'menu.php';
+include 'sub-heading.php';
 
 // Helper function to generate a unique 9-character string
 function generateUniqueId($length = 9) {
@@ -36,7 +37,11 @@ $categories = file_exists($categoryFile) ? json_decode(file_get_contents($catego
 
 // Handle form submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $channel = $POST_['channel'];
+    if (empty($_POST)) {
+        echo "<p class='text-red-500 site-notification error'>Something went wrong! (1)</p>";
+        exit;
+    }
+    $channel = $_POST['channel'];
     $title = $_POST['title'];
     $description = $_POST['description'];
     $tags = formatCommaSeparatedInput($_POST['tags']);
@@ -60,11 +65,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     // Handle thumbnail upload
     $thumbnailPath = null;
+
+    // Check if the thumbnail file is uploaded
     if (!empty($_FILES['thumbnail']['name'])) {
         $allowedThumbnailTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp'];
         if (in_array($_FILES['thumbnail']['type'], $allowedThumbnailTypes)) {
             $thumbnailPath = $videoDir . 'thumbnail_' . basename($_FILES['thumbnail']['name']);
             move_uploaded_file($_FILES['thumbnail']['tmp_name'], $thumbnailPath);
+        }
+    } else {
+        // Check for a URL in the "youtube-thumbnail" element's src attribute and save it to the server
+        if (!empty($_POST['youtube_thumbnail_url'])) {
+            $youtubeThumbnailUrl = $_POST['youtube_thumbnail_url'];
+            $thumbnailContent = file_get_contents($youtubeThumbnailUrl); // Download the youtube thumbnail
+            if ($thumbnailContent) {
+                $thumbnailExtension = pathinfo(parse_url($youtubeThumbnailUrl, PHP_URL_PATH), PATHINFO_EXTENSION);
+                $thumbnailPath = $videoDir . 'thumbnail_youtube.' . $thumbnailExtension;
+                file_put_contents($thumbnailPath, $thumbnailContent); // Save thumbnail onto the server
+            }
         }
     }
 
@@ -90,25 +108,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Save video data to a JSON file
     $videoData = [
         'id' => $id,
-        'unique_id' => $uniqueId,
-        'channel' => $channel,
-        'title' => $title,
+        'unique_id' => $uniqueId, 
+        'channel' => $channel, // Required
+        'title' => $title, // Required
         'alias' => $alias,
-        'description' => $description,
-        'tags' => $tags,
-        'meta_title' => $metaTitle,
-        'meta_description' => $metaDescription,
-        'meta_keywords' => $metaKeywords,
-        'thumbnail' => $thumbnailPath ? basename($thumbnailPath) : null,
-        'video_link' => $videoLink,
-        'category' => $category,
-        'additional_files' => array_map('basename', $additionalFiles),
-        'notes' => $notes,
+        'description' => $description, // Required
+        'tags' => $tags, // Required
+        'meta_title' => $metaTitle, // Optional
+        'meta_description' => $metaDescription, // Optional
+        'meta_keywords' => $metaKeywords, // Optional
+        'thumbnail' => $thumbnailPath ? basename($thumbnailPath) : null, // Optional
+        'video_link' => $videoLink, // Required
+        'category' => $category, // Optional
+        'additional_files' => array_map('basename', $additionalFiles), // Optional
+        'notes' => $notes, // Optional
         'posted_date' => $currentDate,
         'updated_date' => $currentDate,
         'username' => $username,
     ];
-    file_put_contents($videoDir . $uniqueId . '.json', json_encode($videoData, JSON_PRETTY_PRINT));
+
+    // Save the item data
+    $itemJsonPath = $videoDir . $uniqueId . '.json';
+    file_put_contents($itemJsonPath, json_encode($videoData, JSON_PRETTY_PRINT));
 
     // Update or create content.json
     $contentFile = __DIR__ . '/json/content.json';
@@ -141,56 +162,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <?php endforeach; ?>
             </select>
         </div>
-
-        <!-- Title -->
-        <div>
-            <label for="title" class="block text-sm font-medium text-text-light">Title</label>
-            <input type="text" name="title" id="title" required 
-                class="mt-1 block w-full border-gray-600 bg-gray-700 text-text-light rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm p-2">
-        </div>
-
-        <!-- Description -->
-        <div>
-            <label for="description" class="block text-sm font-medium text-text-light">Description</label>
-            <textarea name="description" id="description" rows="5" required 
-                class="mt-1 block w-full border-gray-600 bg-gray-700 text-text-light rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm p-2"></textarea>
-        </div>
-
-        <!-- Tags -->
-        <div>
-            <label for="tags" class="block text-sm font-medium text-text-light">Tags</label>
-            <textarea name="tags" id="tags" rows="3" required 
-                class="mt-1 block w-full border-gray-600 bg-gray-700 text-text-light rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm p-2"></textarea>
-        </div>
-
-        <!-- Meta Title -->
-        <div>
-            <label for="meta_title" class="block text-sm font-medium text-text-light">Meta Title</label>
-            <input type="text" name="meta_title" id="meta_title" required 
-                class="mt-1 block w-full border-gray-600 bg-gray-700 text-text-light rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm p-2">
-        </div>
-
-        <!-- Meta Description -->
-        <div>
-            <label for="meta_description" class="block text-sm font-medium text-text-light">Meta Description</label>
-            <textarea name="meta_description" id="meta_description" rows="3" required 
-                class="mt-1 block w-full border-gray-600 bg-gray-700 text-text-light rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm p-2"></textarea>
-        </div>
-
-        <!-- Meta Keywords -->
-        <div>
-            <label for="meta_keywords" class="block text-sm font-medium text-text-light">Meta Keywords</label>
-            <textarea name="meta_keywords" id="meta_keywords" rows="3" required 
-                class="mt-1 block w-full border-gray-600 bg-gray-700 text-text-light rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm p-2"></textarea>
-        </div>
-
-        <!-- Thumbnail Image -->
-        <div>
-            <label for="thumbnail" class="block text-sm font-medium text-text-light">Thumbnail Image</label>
-            <input type="file" name="thumbnail" id="thumbnail" accept=".jpeg, .jpg, .png, .webp" required 
-                class="mt-1 block w-full text-text-light file:mr-4 file:py-2 file:px-4 file:border file:border-gray-600 file:rounded-md file:text-sm file:bg-gray-700 file:text-text-light hover:file:bg-gray-600">
-        </div>
-
+        
         <!-- Video Link -->
         <div>
             <label for="video_link" class="block text-sm font-medium text-text-light">Video Link</label>
@@ -209,10 +181,39 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </a>
         </div>
 
+        <!-- Title -->
+        <div>
+            <label for="title" class="block text-sm font-medium text-text-light">Title</label>
+            <input type="text" name="title" id="title" required 
+                class="mt-1 block w-full border-gray-600 bg-gray-700 text-text-light rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm p-2">
+        </div>
+
+        <!-- Thumbnail Image -->
+        <div>
+            <label for="thumbnail" class="block text-sm font-medium text-text-light">Thumbnail Image</label>
+            <input type="file" name="thumbnail" id="thumbnail" accept=".jpeg, .jpg, .png, .webp" 
+                class="mt-1 block w-full text-text-light file:mr-4 file:py-2 file:px-4 file:border file:border-gray-600 file:rounded-md file:text-sm file:bg-gray-700 file:text-text-light hover:file:bg-gray-600">
+            <input type="hidden" id="youtube-thumbnail-url" name="youtube_thumbnail_url">
+        </div>
+
+        <!-- Description -->
+        <div>
+            <label for="description" class="block text-sm font-medium text-text-light">Description</label>
+            <textarea name="description" id="description" rows="5" required 
+                class="mt-1 block w-full border-gray-600 bg-gray-700 text-text-light rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm p-2"></textarea>
+        </div>
+
+        <!-- Tags -->
+        <div>
+            <label for="tags" class="block text-sm font-medium text-text-light">Tags</label>
+            <textarea name="tags" id="tags" rows="3" required 
+                class="mt-1 block w-full border-gray-600 bg-gray-700 text-text-light rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm p-2"></textarea>
+        </div>
+
         <!-- Category Dropdown -->
         <div>
             <label for="category" class="block text-sm font-medium text-text-light">Category</label>
-            <select name="category" id="category" required 
+            <select name="category" id="category"
                 class="mt-1 block w-full border-gray-600 bg-gray-700 text-text-light rounded-md p-2">
                 <option value="">Select a Category</option>
                 <?php foreach ($categories as $categoryId => $category): ?>
@@ -221,6 +222,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     </option>
                 <?php endforeach; ?>
             </select>
+        </div>
+
+        <!-- Meta Title -->
+        <div>
+            <label for="meta_title" class="block text-sm font-medium text-text-light">Meta Title</label>
+            <input type="text" name="meta_title" id="meta_title" 
+                class="mt-1 block w-full border-gray-600 bg-gray-700 text-text-light rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm p-2">
+        </div>
+
+        <!-- Meta Description -->
+        <div>
+            <label for="meta_description" class="block text-sm font-medium text-text-light">Meta Description</label>
+            <textarea name="meta_description" id="meta_description" rows="3" 
+                class="mt-1 block w-full border-gray-600 bg-gray-700 text-text-light rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm p-2"></textarea>
+        </div>
+
+        <!-- Meta Keywords -->
+        <div>
+            <label for="meta_keywords" class="block text-sm font-medium text-text-light">Meta Keywords</label>
+            <textarea name="meta_keywords" id="meta_keywords" rows="3" 
+                class="mt-1 block w-full border-gray-600 bg-gray-700 text-text-light rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm p-2"></textarea>
         </div>
 
         <!-- Additional Files -->
@@ -240,7 +262,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <!-- Custom ID -->
         <div>
             <label for="id" class="block text-sm font-medium text-text-light">Custom ID (Integer)</label>
-            <input type="number" name="id" id="id" required 
+            <input type="number" name="id" id="id"  
                 class="mt-1 block w-full border-gray-600 bg-gray-700 text-text-light rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm p-2">
         </div>
 

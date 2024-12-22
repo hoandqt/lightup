@@ -3,17 +3,17 @@ session_start();
 
 // Check if the user is already logged in
 if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
-    $redirectUrl = $_GET['redirect'] ?? 'index.php';
+    $redirectUrl = $_GET['redirect'] ?? '/';
     header("Location: $redirectUrl");
     exit;
 }
 
 // Get the redirect URL from the query parameter
-$redirectUrl = $_GET['redirect'] ?? 'index.php';
+$redirectUrl = $_GET['redirect'] ?? '/';
 $pageTitle = "Login to LightUp.TV";
 $pageDescription = "Login to LightUp.TV";
 $pageKeywords = "";
-$canonicalURL = "https://www.lightup.tv/login.php";
+$canonicalURL = "https://www.lightup.tv/login";
 include 'header.php';
 include 'menu.php';
 ?>
@@ -29,7 +29,7 @@ include 'menu.php';
                 Invalid username or password. Please try again.
             </div>
         <?php endif; ?>
-        <form class="mt-8 space-y-6" action="authenticate.php" method="POST">
+        <form class="mt-8 space-y-6" action="authenticate" method="POST">
             <input type="hidden" name="redirect" value="<?php echo htmlspecialchars($redirectUrl); ?>">
             <div class="rounded-md shadow-sm -space-y-px">
                 <!-- Username -->

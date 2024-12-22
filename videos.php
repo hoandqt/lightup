@@ -1,12 +1,15 @@
 <?php
 session_start();
 
+require_once "functions.php";
+
 $pageTitle = "Videos";
 $pageDescription = "Explore videos on LightUp.TV";
 $pageKeywords = "videos, LightUp.TV, ambience, relaxation";
-$canonicalURL = "https://www.lightup.tv/videos.php";
+$canonicalURL = "https://www.lightup.tv/videos";
 include 'header.php';
 include 'menu.php';
+include 'sub-heading.php';
 
 // Path to content.json
 $contentFile = __DIR__ . '/json/content.json';
@@ -30,17 +33,35 @@ if (!file_exists($contentFile)) {
                 continue;
             }
             $videoDetails = json_decode(file_get_contents($videoFile), true);
-            $description = strlen($videoDetails['description']) > 150 ? substr($videoDetails['description'], 0, 150) . "..." : $videoDetails['description'];
+            $description = trimDescription($videoDetails['description'], 150);
+
+            // Determine the video image
+            if (!empty($videoDetails['thumbnail'])) {
+                $videoImage = "item-data/" . $video['unique_id'] . "/" . $videoDetails['thumbnail'];
+            } else if (!empty($videoDetails['video_thumbnail_url'])) {
+                $videoImage = $videoDetails['video_thumbnail_url'];
+            } else {
+                $videoImage = "images/default-image.jpeg";
+            }
+
+            // Determine the video link
+            $videoLink = !empty($videoDetails['alias']) 
+                ? "/video/" . htmlspecialchars($videoDetails['alias']) 
+                : "/video?id=" . htmlspecialchars($video['unique_id']);
             ?>
             <div class="bg-gray-800 p-4 rounded-lg shadow-lg">
-                <img src="item-data/<?= $video['unique_id'] ?>/<?= $videoDetails['thumbnail'] ?>" alt="<?= htmlspecialchars($videoDetails['title']) ?>" class="w-full h-40 object-cover rounded">
-                <h2 class="text-lg font-bold text-sunset-yellow mt-4"><?= htmlspecialchars($videoDetails['title']) ?></h2>
+                <a href="<?= $videoLink ?>">
+                    <img src="<?= $videoImage ?>" alt="<?= htmlspecialchars($videoDetails['title']) ?>" class="w-full h-40 object-cover rounded">
+                </a>
+                <h2 class="text-lg font-bold text-sunset-yellow mt-4">
+                    <a href="<?= $videoLink ?>"><?= htmlspecialchars($videoDetails['title']) ?></a>
+                </h2>
                 <p class="text-sm text-gray-400 mt-2"><?= htmlspecialchars($description) ?></p>
                 
                 <div class="flex justify-between mt-4">
                   <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
-                    <a href="edit-video.php?id=<?= $video['unique_id'] ?>" class="px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700">Edit</a>
-                    <button onclick="showDeleteModal('<?= $video['unique_id'] ?>')" class="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700">Delete</button>
+                    <a href="edit-video?id=<?= $video['unique_id'] ?>" class="btn edit-btn px-4 py-2 bg-indigo-600 text-white rounded hover:bg-indigo-700">Edit</a>
+                    <button onclick="showDeleteModal('<?= $video['unique_id'] ?>')" class="btn delete-btn px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700">Delete</button>
                     <?php endif; ?>
                 </div>
             </div>
@@ -59,44 +80,6 @@ if (!file_exists($contentFile)) {
         </div>
     </div>
 </div>
-
-<script>
-    let deleteUniqueId = '';
-
-    function showDeleteModal(uniqueId) {
-        deleteUniqueId = uniqueId;
-        document.getElementById('deleteModal').classList.remove('hidden');
-    }
-
-    document.getElementById('cancelDelete').addEventListener('click', () => {
-        document.getElementById('deleteModal').classList.add('hidden');
-    });
-
-    document.getElementById('confirmDelete').addEventListener('click', () => {
-        fetch('delete-video.php', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ unique_id: deleteUniqueId })
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                alert('Video deleted successfully!');
-                location.reload();
-            } else {
-                alert('Error deleting video: ' + data.message);
-            }
-        })
-        .catch(error => {
-            alert('An error occurred.');
-            console.error(error);
-        });
-
-        document.getElementById('deleteModal').classList.add('hidden');
-    });
-</script>
 
 <?php } ?>
 

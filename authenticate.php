@@ -1,7 +1,9 @@
 <?php
 session_start();
 
-$credentialsFile = __DIR__ . '/json/credentials.json';
+require_once "functions.php";
+
+$credentialsFile = '/var/www/html/json/credentials.json';
 
 // Load credentials file
 if (file_exists($credentialsFile)) {

@@ -12,3 +12,4 @@ helper/
 
 # Ignore the .env file
 .env
+/vendor/

@@ -1,0 +1,21 @@
+{
+    "name": "ad/lightup.tv",
+    "description": "lightup.tv",
+    "autoload": {
+        "psr-4": {
+            "Ad\\LightupTv\\": "src/"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "require": {
+        "openai-php/client": "^0.10.3",
+        "symfony/http-client": "^7.2",
+        "nyholm/psr7": "^1.8"
+    },
+    "config": {
+        "allow-plugins": {
+            "php-http/discovery": true
+        }
+    }
+}

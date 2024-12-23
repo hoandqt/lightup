@@ -65,9 +65,9 @@ $thumbnail = !empty($videoData['thumbnail'])
         : $baseURL . "/images/default-image.jpeg");
 
 // Page metadata
-$pageTitle = htmlspecialchars($videoData['title']);
-$pageDescription = htmlspecialchars($videoData['description']);
-$pageKeywords = htmlspecialchars($videoData['tags']);
+$pageTitle = htmlspecialchars($videoData['meta_title'] ?: $videoData['title']);
+$pageDescription = htmlspecialchars($videoData['meta_description']);
+$pageKeywords = htmlspecialchars($videoData['meta_keywords']);
 $canonicalURL = $alias 
     ? "https://www.lightup.tv/video/{$alias}" 
     : "https://www.lightup.tv/video?id={$videoData['unique_id']}";
@@ -87,7 +87,8 @@ include 'sub-heading.php';
     <!-- Title with Dropdown -->
     <div class="flex">
         <h1 class="text-3xl font-bold text-text-light"><?= htmlspecialchars($videoData['title']) ?></h1>
-        <div class="relative top-0">
+        <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
+        <div class="relative top-0 right-0 ml-auto">
             <button id="dropdownButton" class="px-4 py-2 bg-gray-700 text-white rounded hover:bg-gray-600 focus:outline-none">
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6 inline-block h-5">
                 <path stroke-linecap="round" stroke-linejoin="round" d="m4.5 5.25 7.5 7.5 7.5-7.5m-15 6 7.5 7.5 7.5-7.5" />
@@ -102,6 +103,7 @@ include 'sub-heading.php';
                 </button>
             </div>
         </div>
+        <?php endif; ?>
     </div>
 
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-6">
@@ -124,6 +126,7 @@ include 'sub-heading.php';
     </div>
 </div>
 
+<?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
 <!-- Delete Confirmation Modal -->
 <div id="deleteModal" class="fixed inset-0 hidden z-50 bg-black bg-opacity-50 flex justify-center items-center">
     <div class="bg-gray-800 text-text-light rounded-lg p-6 max-w-md w-full">
@@ -135,5 +138,6 @@ include 'sub-heading.php';
         </div>
     </div>
 </div>
+<?php endif; ?>
 
 <?php include 'footer.php'; ?>

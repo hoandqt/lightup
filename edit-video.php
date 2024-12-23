@@ -44,6 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $videoData['video_link'] = $_POST['video_link'];
     $videoData['video_thumbnail_url'] = $_POST['video_thumbnail_url'];
     $videoData['category'] = $_POST['category'];
+    $videoData['subcategory'] = $_POST['subcategory'];
     $videoData['notes'] = $_POST['notes'];
     $videoData['updated_date'] = date('Y-m-d H:i:s');
 
@@ -309,6 +310,38 @@ if (!file_exists($jsonFilePath)) {
             <?php endforeach; ?>
         </select>
     </div>
+
+    <!-- Subcategory Dropdown -->
+    <div id="subcategory-container" class="mt-4 <?= !empty($videoData['subcategory']) ? '' : 'hidden' ?>">
+        <label for="subcategory" class="block text-sm font-medium text-text-light">Subcategory</label>
+        <select name="subcategory" id="subcategory"
+            class="mt-1 block w-full border-gray-600 bg-gray-700 text-text-light rounded-md p-2">
+            <option value="">Select a Subcategory</option>
+            <?php
+            if (!empty($videoData['category'])):
+                $selectedCategoryId = $videoData['category'];
+                $subcategories = $categories[$selectedCategoryId]['subcategories'] ?? [];
+                foreach ($subcategories as $subcategory):
+                    $subcategoryName = $subcategory['name'] ?? ''; // Use the name as the identifier
+            ?>
+                <option value="<?= htmlspecialchars($subcategoryName) ?>"
+                    <?= $videoData['subcategory'] === $subcategoryName ? 'selected' : '' ?>>
+                    <?= htmlspecialchars($subcategoryName) ?>
+                </option>
+            <?php endforeach; endif; ?>
+        </select>
+    </div>
+    <script src="/js/fetch-subcategories.js"></script>
+
+    <!-- Create Metadata Button -->
+    <div>
+        <button type="button" id="create-metadata" 
+            class="px-4 py-2 mt-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700">
+            Generate Metadata
+        </button>
+        <p id="metadata-loading" class="text-gray-400 hidden">Generating metadata...</p>
+    </div>
+    <script src="/js/generate-metadata.js"></script>
 
     <!-- Meta Title -->
     <div>

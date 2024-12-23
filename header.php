@@ -12,10 +12,12 @@ $cssVersion = $debug ? '?v=' . rand(1000, 9999) : '';
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title><?= $pageTitle ?? 'Welcome to LightUp.TV'; ?></title>
-  <meta name="description"
-    content="<?= $pageDescription ?? 'LightUp.TV - Relaxing ambience videos and immersive soundscapes for your peace and creativity.'; ?>">
-  <meta name="keywords"
-    content="<?= $pageKeywords ?? 'ambience videos, relaxing music, meditation sounds, mindfulness, LightUp.TV'; ?>">
+  <?php if (!empty($pageDescription)): ?>
+  <meta name="description" content="<?= htmlspecialchars($pageDescription); ?>">
+  <?php endif; ?>
+  <?php if (!empty($pageKeywords)): ?>
+  <meta name="keywords" content="<?= htmlspecialchars($pageKeywords); ?>">
+  <?php endif; ?>
   <link rel="canonical" href="<?= $canonicalURL ?? 'https://www.lightup.tv/'; ?>">
   <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-T5QQL0PXXW"></script>
@@ -250,30 +252,34 @@ $cssVersion = $debug ? '?v=' . rand(1000, 9999) : '';
 
       if (document.getElementById('confirmDelete')) {
         document.getElementById('confirmDelete').addEventListener('click', () => {
-            fetch('delete-video', {
+            fetch('/delete-video', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({ unique_id: deleteUniqueId })
             })
-            .then(response => response.json())
+            .then(response => {
+                console.log('Response:', response);
+                return response.json();
+            })
             .then(data => {
                 if (data.success) {
                     alert('Video deleted successfully!');
-                    location.reload();
+                    window.location.href = '/videos'; // Redirect to /videos
                 } else {
                     alert('Error deleting video: ' + data.message);
                 }
             })
             .catch(error => {
-                alert('An error occurred.');
-                console.error(error);
+                alert('An error occurred. (1)');
+                console.error('Detailed error information:', error);
             });
 
             document.getElementById('deleteModal').classList.add('hidden');
         });
-      }
+    }
+
 
     });
 

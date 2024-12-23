@@ -50,6 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $metaKeywords = formatCommaSeparatedInput($_POST['meta_keywords']);
     $videoLink = $_POST['video_link'];
     $category = $_POST['category'];
+    $subcategory = $_POST['subcategory'];
     $notes = $_POST['notes'];
     $id = $_POST['id'];
     $uniqueId = generateUniqueId();
@@ -120,6 +121,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'thumbnail' => $thumbnailPath ? basename($thumbnailPath) : null, // Optional
         'video_link' => $videoLink, // Required
         'category' => $category, // Optional
+        'subcategory' => $subcategory, // Optional
         'additional_files' => array_map('basename', $additionalFiles), // Optional
         'notes' => $notes, // Optional
         'posted_date' => $currentDate,
@@ -162,7 +164,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <?php endforeach; ?>
             </select>
         </div>
-        
+
         <!-- Video Link -->
         <div>
             <label for="video_link" class="block text-sm font-medium text-text-light">Video Link</label>
@@ -223,6 +225,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <?php endforeach; ?>
             </select>
         </div>
+
+        <!-- Subcategory Dropdown (Hidden Initially) -->
+        <div id="subcategory-container" class="hidden mt-4">
+            <label for="subcategory" class="block text-sm font-medium text-text-light">Subcategory</label>
+            <select name="subcategory" id="subcategory"
+                class="mt-1 block w-full border-gray-600 bg-gray-700 text-text-light rounded-md p-2">
+                <option value="">Select a Subcategory</option>
+            </select>
+        </div>
+        <script src="/js/fetch-subcategories.js"></script>
+
+        <!-- Create Metadata Button -->
+        <div>
+            <button type="button" id="create-metadata" 
+                class="px-4 py-2 mt-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700">
+                Generate Metadata
+            </button>
+            <p id="metadata-loading" class="text-gray-400 hidden">Generating metadata...</p>
+        </div>
+        <script src="/js/generate-metadata.js"></script>
 
         <!-- Meta Title -->
         <div>

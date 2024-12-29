@@ -1,0 +1,17 @@
+{
+    "name": "vophu/lightup",
+    "autoload": {
+        "psr-4": {
+            "Vophu\\Lightup\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Phu",
+            "email": "vophu2005@gmail.com"
+        }
+    ],
+    "require": {
+        "ckeditor/ckeditor": "^4.25"
+    }
+}

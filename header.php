@@ -21,7 +21,10 @@ $cssVersion = $debug ? '?v=' . rand(1000, 9999) : '';
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-T5QQL0PXXW"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
     gtag('js', new Date());
     gtag('config', 'G-T5QQL0PXXW');
   </script>
@@ -56,7 +59,9 @@ $cssVersion = $debug ? '?v=' . rand(1000, 9999) : '';
         fetch(thumbnailUrl)
           .then(response => response.blob())
           .then(blob => {
-            const file = new File([blob], "youtube_thumbnail.jpg", { type: "image/jpeg" });
+            const file = new File([blob], "youtube_thumbnail.jpg", {
+              type: "image/jpeg"
+            });
             const dataTransfer = new DataTransfer();
             dataTransfer.items.add(file);
             document.getElementById('thumbnail').files = dataTransfer.files;
@@ -151,8 +156,13 @@ $cssVersion = $debug ? '?v=' . rand(1000, 9999) : '';
           // Send new data to server for updating
           await fetch('update-channel.php', {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ id: newId, data: newChannel })
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              id: newId,
+              data: newChannel
+            })
           });
 
           channelId = newId;
@@ -174,7 +184,6 @@ $cssVersion = $debug ? '?v=' . rand(1000, 9999) : '';
         console.error("Failed to update channel dropdown:", error);
       }
     }
-
   </script>
 
   <script src="https://cdn.tailwindcss.com"></script>

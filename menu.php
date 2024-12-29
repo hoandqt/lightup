@@ -10,7 +10,7 @@
         <a href="about.php" class="text-text-light hover:text-sunset-yellow px-3 py-2 rounded-md text-sm font-medium">About</a>
         <a href="videos.php" class="text-text-light hover:text-sunset-yellow px-3 py-2 rounded-md text-sm font-medium">Videos</a>
         <a href="contact.php" class="text-text-light hover:text-sunset-yellow px-3 py-2 rounded-md text-sm font-medium">Contact</a>
-        
+
         <!-- Conditionally Add "Add Video" and Auth Buttons -->
         <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true): ?>
           <a href="add-video.php" class="text-text-light hover:text-sunset-yellow px-3 py-2 rounded-md text-sm font-medium">Add Video</a>
@@ -37,7 +37,7 @@
     <a href="about.php" class="block text-text-light hover:bg-sunset-yellow px-3 py-2 rounded-md">About</a>
     <a href="videos.php" class="block text-text-light hover:bg-sunset-yellow px-3 py-2 rounded-md">Videos</a>
     <a href="contact.php" class="block text-text-light hover:bg-sunset-yellow px-3 py-2 rounded-md">Contact</a>
-    
+
     <!-- Conditionally Add "Add Video" and Auth Buttons -->
     <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true): ?>
       <a href="add-video.php" class="block text-text-light hover:bg-sunset-yellow px-3 py-2 rounded-md">Add Video</a>

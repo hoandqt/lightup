@@ -40,6 +40,34 @@ $cssVersion = $debug ? '?v=' . rand(1000, 9999) : '';
       }
     }
 
+    function deleteThumbnail(uniqueId) {
+      if (!confirm("Are you sure you want to delete this thumbnail?")) {
+        return;
+      }
+
+      fetch('delete-thumbnail', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ unique_id: uniqueId })
+      })
+        .then(response => response.json())
+        .then(data => {
+          if (data.success) {
+            alert('Thumbnail deleted successfully!');
+            document.getElementById('download-thumbnail-checkbox').checked = false;
+            location.reload(); // Reload the page to update the UI
+          } else {
+            alert('Failed to delete thumbnail: ' + data.message);
+          }
+        })
+        .catch(error => {
+          console.error('Error deleting thumbnail:', error);
+          alert('An unexpected error occurred.');
+        });
+    }
+
     function fetchYouTubeThumbnail() {
       const videoLink = document.getElementById('video_link').value; // Get video link
       const thumbnailImg = document.getElementById('youtube-thumbnail');
@@ -56,7 +84,7 @@ $cssVersion = $debug ? '?v=' . rand(1000, 9999) : '';
         thumbnailImg.classList.remove('hidden');
 
         // Auto-download thumbnail (optional)
-        fetch(thumbnailUrl)
+        fetch(thumbnailUrl, { mode: 'no-cors' })
           .then(response => response.blob())
           .then(blob => {
             const file = new File([blob], "youtube_thumbnail.jpg", {
@@ -67,7 +95,7 @@ $cssVersion = $debug ? '?v=' . rand(1000, 9999) : '';
             document.getElementById('thumbnail').files = dataTransfer.files;
           })
           .catch(err => {
-            //alert("Failed to fetch the thumbnail. It may not be available.");
+            console.log("Failed to fetch the thumbnail. It may not be available.");
             console.error(err);
           });
       } else {
@@ -107,9 +135,11 @@ $cssVersion = $debug ? '?v=' . rand(1000, 9999) : '';
         if (thumbnailUrl) {
           const thumbnailImage = document.getElementById('youtube-thumbnail');
           const thumbnailLink = document.getElementById('thumbnail-download-link');
+          const inputthumbnailUrl = document.getElementById('youtube-thumbnail-url');
 
           thumbnailImage.src = thumbnailUrl;
           thumbnailLink.href = thumbnailUrl; // Set download link
+          inputthumbnailUrl.value = thumbnailUrl; // Set the hidden value of youtube thumbnail url
           thumbnailLink.classList.remove('hidden');
         }
 
@@ -154,7 +184,7 @@ $cssVersion = $debug ? '?v=' . rand(1000, 9999) : '';
           };
 
           // Send new data to server for updating
-          await fetch('update-channel.php', {
+          await fetch('update-channel', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'
@@ -188,7 +218,7 @@ $cssVersion = $debug ? '?v=' . rand(1000, 9999) : '';
 
   <script src="https://cdn.tailwindcss.com"></script>
 
-  <link rel="stylesheet" href="css/style.css<?= $cssVersion; ?>">
+  <link rel="stylesheet" href="/css/style.css<?= $cssVersion; ?>">
 </head>
 
 <body class="bg-dark-gray text-text-light">

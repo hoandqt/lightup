@@ -2,6 +2,8 @@
 header('Content-Type: application/json');
 session_start();
 
+require_once "functions.php";
+
 // Check if the user is logged in and is an admin
 if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true || $_SESSION['role'] !== 'admin') {
     echo json_encode(['success' => false, 'message' => 'Unauthorized']);

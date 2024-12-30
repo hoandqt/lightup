@@ -124,6 +124,8 @@ AddEncoding gzip svgz
   
   # Redirect /video/[alias] to video.php with alias as a GET parameter
   RewriteRule ^video/([^/]+)/?$ video.php?alias=$1 [L,QSA]
+  RewriteRule ^post/([^/]+)/?$ post.php?alias=$1 [L,QSA]
+  RewriteRule ^video-category/([^/]+)/?$ video-category.php?alias=$1 [L,QSA]
 
   # Redirect requests without .php to their corresponding .php files
   RewriteCond %{REQUEST_FILENAME}.php -f
@@ -171,6 +173,9 @@ AddEncoding gzip svgz
   RewriteCond %{REQUEST_URI} !/core/modules/statistics/statistics.php$
   # Deny access to any other PHP files that do not match the rules above.
   # Specifically, disallow autoload.php from being served directly.
+  RewriteCond %{REQUEST_URI} !/helper/extract-video-image?.php
+  RewriteCond %{REQUEST_URI} !/ajax/load-content?.php
+  RewriteCond %{REQUEST_URI} !/dev-1/lightup/*
   RewriteRule "^(.+/.*|autoload)\.php($|/)" - [F]
 
   # Rules to correctly serve gzip compressed CSS and JS files.

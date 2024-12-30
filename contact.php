@@ -1,10 +1,11 @@
 <?php
 session_start();
 
-$pageTitle = "Contact Us - LightUp.TV";
-$pageDescription = "Get in touch with the LightUp.TV team! Have questions, feedback, or collaboration ideas? Visit our Contact Us page for quick support and connections. We're here to help!";
+$pageTitle = "Contact Us: Get in Touch for Questions and Support";
+$pageDescription = "Have questions or need assistance? Reach out to us through our Contact Us page. We're here to help and look forward to hearing from you.";
 $pageKeywords = "LightUp.TV contact, contact LightUp.TV, LightUp.TV support, contact form, LightUp.TV inquiries, feedback, collaboration, LightUp.TV help, get in touch, customer service";
-$canonicalURL = "https://www.lightup.tv/contact";
+$canonicalURL = "https://lightup.tv/contact";
+$ogImageURL = "https://lightup.tv/images/Contact-Us-LightUpTV.jpg";
 include 'header.php';
 include 'menu.php';
 
@@ -44,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 ?>
 
-<div class="container mx-auto p-8">
+<div class="<?php echo $mainContainerClass ?>">
   <h1 class="text-3xl font-bold text-sunset-yellow">Contact Us</h1>
   <p class="text-gray-300 mt-4">Have a question, feedback, or an idea to share? We'd love to hear from you! Fill out the form below, and our team will get back to you as soon as possible.</p>
 

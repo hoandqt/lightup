@@ -1,0 +1,56 @@
+#
+# robots.txt
+#
+# This file is to prevent the crawling and indexing of certain parts
+# of your site by web crawlers and spiders run by sites like Yahoo!
+# and Google. By telling these "robots" where not to go on your site,
+# you save bandwidth and server resources.
+#
+# This file will be ignored unless it is at the root of your host:
+# Used:    http://example.com/robots.txt
+# Ignored: http://example.com/site/robots.txt
+#
+# For more information about the robots.txt standard, see:
+# http://www.robotstxt.org/robotstxt.html
+
+User-agent: *
+# CSS, JS, Images
+Allow: /css/*.css$
+Allow: /css/*.css?
+Allow: /js/*.js$
+Allow: /js/*.js?
+Allow: /images/*.gif
+Allow: /images/*.jpg
+Allow: /images/*.jpeg
+Allow: /images/*.png
+Allow: /images/*.svg
+Allow: /images/*.webp
+# Directories
+Disallow: /ajax/
+Disallow: /json/
+# Files
+Disallow: /README.txt
+Disallow: /web.config
+# Paths (clean URLs)
+Disallow: /lightup-web/*
+Disallow: /dev-1/*
+Disallow: /admin/
+Disallow: /comment/reply/
+Disallow: /search/
+Disallow: /login
+Disallow: /logout
+Disallow: /add
+Disallow: /manage-
+Disallow: /json/*.json
+Disallow: /item-data/*/*.json
+Disallow: /post-data/*/*.json
+# Paths (no clean URLs)
+Disallow: /video?alias=
+Disallow: /video?id=
+Disallow: /post?id=
+Disallow: /post?alias=
+Disallow: /login.php
+Disallow: /logout.php
+Disallow: /contact.php
+Disallow: /about.php
+Disallow: /*/index.html

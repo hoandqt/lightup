@@ -41,6 +41,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $videoData['meta_title'] = $_POST['meta_title'];
     $videoData['meta_description'] = $_POST['meta_description'];
     $videoData['meta_keywords'] = formatCommaSeparatedInput($_POST['meta_keywords']);
+    $videoData['og_image_alt'] = $_POST['og_image_alt'];
+    $videoData['new_description'] = $_POST['new_description'];
     $videoData['video_link'] = $_POST['video_link'];
     $videoData['video_thumbnail_url'] = $_POST['video_thumbnail_url'];
     $videoData['category'] = $_POST['category'];
@@ -143,6 +145,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'unique_id' => $uniqueId,
         'posted_date' => $postedDate,
         'updated_date' => $videoData['updated_date'],
+        'category' => $videoData['category']
     ];
     file_put_contents($contentFile, json_encode($content, JSON_PRETTY_PRINT));
 
@@ -165,7 +168,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 $pageTitle = "Edit Video Details";
 $pageDescription = "Edit Video Details on LightUp.TV";
 $pageKeywords = "";
-$canonicalURL = "https://www.lightup.tv/edit-video.php?id=$uniqueId";
+$canonicalURL = "https://lightup.tv/edit-video?id=$uniqueId";
 include 'header.php';
 include 'menu.php';
 include 'sub-heading.php';
@@ -182,6 +185,18 @@ if (!file_exists($jsonFilePath)) {
     exit;
 }
 ?>
+
+
+<script>
+    const script1 = document.createElement('script');
+    script1.src = `/js/generate-metadata.js?v=${Math.floor(Math.random() * 10000)}`;
+    document.head.appendChild(script1);
+
+    const script2 = document.createElement('script');
+    script2.src = `/js/re-generate.js?v=${Math.floor(Math.random() * 10000)}`;
+    document.head.appendChild(script2);
+</script>
+
 <div class="container mx-auto p-8">
   <h1 class="text-3xl font-bold text-text-light mb-6">Edit Video Details</h1>
 
@@ -215,7 +230,7 @@ if (!file_exists($jsonFilePath)) {
     <!-- Thumbnail Preview with Download -->
     <div>
         <a id="thumbnail-download-link" href="#" download="youtube_thumbnail.jpg" class="hidden">
-            <img id="youtube-thumbnail" src="" alt="Thumbnail Preview" class="w-48 h-32 mt-2 rounded cursor-pointer">
+            <img id="youtube-thumbnail" src="" alt="Thumbnail Preview" class="h-32 mt-2 rounded cursor-pointer">
         </a>
     </div>
 
@@ -235,13 +250,17 @@ if (!file_exists($jsonFilePath)) {
             // Local thumbnail exists
             $randomNumber = rand(0, 99999);
             $thumbnailPath = "item-data/$uniqueId/" . $videoData['thumbnail'] . "?v=".$randomNumber;
+            $fullThumbnailPath = "https://lightup.tv/item-data/$uniqueId/" . $videoData['thumbnail'];
             $thumbnailHtml = "
                 <div class='thumbnail-section'>
                     <label for='thumbnail' class='block text-sm font-medium text-text-light'>Thumbnail Image (Current use: Local)</label>
-                    <img src='$thumbnailPath' alt='Thumbnail' class='w-48 h-32 mt-2 mb-2 rounded'>
-                    <button type='button' onclick='deleteThumbnail(".$uniqueId.")' class='px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700'>
+                    <img src='$thumbnailPath' alt='Thumbnail' class='w-48 mt-2 mb-2 rounded'>
+                    <button type='button' onclick='deleteThumbnail(\"".$uniqueId."\")' class='px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700'>
                         Delete Thumbnail
                     </button>
+                    <span id='generateAltBtn' class='generate-image-alt inline-block cursor-pointer px-4 py-2 mt-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700' img-src-data='$fullThumbnailPath'>Generate Image Alt</span>
+                    <div id='altText' class='mt-2'>". htmlspecialchars($videoData['og_image_alt']) ."</div>
+                    <script src='js/generate-image-alt.js?v=".$randomNumber."'></script>
                 </div>";
         } elseif (!empty($videoData['video_thumbnail_url'])) {
             // Fallback to remote thumbnail
@@ -249,7 +268,7 @@ if (!file_exists($jsonFilePath)) {
             $thumbnailHtml = "
                 <div class='thumbnail-section'>
                     <label for='thumbnail' class='block text-sm font-medium text-text-light'>Thumbnail Image (Current use: Remote)</label>
-                    <img src='$thumbnailPath' alt='Thumbnail' class='w-48 h-32 mt-2 mb-2 rounded'>
+                    <img src='$thumbnailPath' alt='Thumbnail' class='w-48 mt-2 mb-2 rounded'>
                 </div>";
         }
 
@@ -280,7 +299,7 @@ if (!file_exists($jsonFilePath)) {
         </div>
       </div>
       <div id="thumbnail-preview" class="mt-4">
-          <img id="youtube-thumbnail" src="" alt="Thumbnail Preview" class="w-32 h-32 object-cover rounded hidden">
+          <img id="youtube-thumbnail" src="" alt="Thumbnail Preview" class="h-32 object-cover rounded hidden">
       </div>
     </div>
 
@@ -341,27 +360,49 @@ if (!file_exists($jsonFilePath)) {
         </button>
         <p id="metadata-loading" class="text-gray-400 hidden">Generating metadata...</p>
     </div>
-    <script src="/js/generate-metadata.js"></script>
 
     <!-- Meta Title -->
     <div>
-        <label for="meta_title" class="block text-sm font-medium text-text-light">Meta Title</label>
+        <label for="meta_title" class="inline-block text-sm font-medium text-text-light">Meta Title</label>
+        <span class="re-generate inline-block ml-1" onclick="regenerate('text', '#meta_title', this)">Re-generate</span>
+
         <input type="text" name="meta_title" id="meta_title" 
             class="mt-1 block w-full border-gray-600 bg-gray-700 text-text-light rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm p-2" value="<?= htmlspecialchars($videoData['meta_title']) ?>">
     </div>
 
     <!-- Meta Description -->
     <div>
-        <label for="meta_description" class="block text-sm font-medium text-text-light">Meta Description</label>
+        <label for="meta_description" class="inline-block text-sm font-medium text-text-light">Meta Description</label>
+        <span class="re-generate inline-block ml-1" onclick="regenerate('text', '#meta_description', this)">Re-generate</span>
+
         <textarea name="meta_description" id="meta_description" rows="3" 
             class="mt-1 block w-full border-gray-600 bg-gray-700 text-text-light rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm p-2"><?= htmlspecialchars($videoData['meta_description']) ?></textarea>
     </div>
 
     <!-- Meta Keywords -->
     <div>
-        <label for="meta_keywords" class="block text-sm font-medium text-text-light">Meta Keywords</label>
+        <label for="meta_keywords" class="inline-block text-sm font-medium text-text-light">Meta Keywords</label>
+        <span class="re-generate inline-block ml-1" onclick="regenerate('text', '#meta_keywords', this)">Re-generate</span>
+
         <textarea name="meta_keywords" id="meta_keywords" rows="3" 
             class="mt-1 block w-full border-gray-600 bg-gray-700 text-text-light rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm p-2"><?= htmlspecialchars($videoData['meta_keywords']) ?></textarea>
+    </div>
+
+    <!-- OG Image Alt -->
+    <div>
+        <label for="og_image_alt" class="block text-sm font-medium text-text-light">OG Image Alt</label>
+        <input type="text" name="og_image_alt" id="og_image_alt" 
+            class="mt-1 block w-full border-gray-600 bg-gray-700 text-text-light rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm p-2" value="<?= htmlspecialchars($videoData['og_image_alt']) ?>">
+    </div>
+
+    <!-- New Description for content -->
+    <div>
+        <label for="new_description" class="inline-block text-sm font-medium text-text-light">New Description</label>
+        <span><input type="number" id="word_number_required" class="w-20 ml-2 inline-block word-number-required border-gray-600 bg-gray-700 text-text-light rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm px-2 p-1" placeholder="1200" /> words</span>
+        <span class="re-generate inline-block ml-1" onclick="regenerate('html', '#new_description', this)">Re-generate</span>
+
+        <textarea name="new_description" id="new_description" rows="10" 
+            class="mt-1 block w-full border-gray-600 bg-gray-700 text-text-light rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm p-2"><?= htmlspecialchars($videoData['new_description']) ?></textarea>
     </div>
 
     <!-- Notes -->
@@ -401,5 +442,6 @@ if (!file_exists($jsonFilePath)) {
     </div>
   </form>
 </div>
+<div id="content-loading" class="status w-full p-4 flex justify-center items-center hidden"></div>
 
 <?php include 'footer.php'; ?>

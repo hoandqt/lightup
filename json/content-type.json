@@ -1,0 +1,14 @@
+{
+  "video": {
+    "name": "video",
+    "title": "Video content type",
+    "alias": "videos",
+    "content_path": "/json/content.json"
+  },
+  "post": {
+    "name": "post",
+    "title": "Post content type",
+    "alias": "blogs",
+    "content_path": "/json/post-content.json"
+  }
+}

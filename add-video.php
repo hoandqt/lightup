@@ -13,7 +13,7 @@ if (!isset($_SESSION['loggedin']) || $_SESSION['loggedin'] !== true) {
 $pageTitle = "Add a New Video";
 $pageDescription = "Add a New Video to LightUp.TV";
 $pageKeywords = "";
-$canonicalURL = "https://www.lightup.tv/add-video.php";
+$canonicalURL = "https://lightup.tv/add-video";
 include 'header.php';
 include 'menu.php';
 include 'sub-heading.php';
@@ -48,6 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $metaTitle = $_POST['meta_title'];
     $metaDescription = $_POST['meta_description'];
     $metaKeywords = formatCommaSeparatedInput($_POST['meta_keywords']);
+    $newDescription = $_POST['new_description'];
     $videoLink = $_POST['video_link'];
     $category = $_POST['category'];
     $subcategory = $_POST['subcategory'];
@@ -118,6 +119,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'meta_title' => $metaTitle, // Optional
         'meta_description' => $metaDescription, // Optional
         'meta_keywords' => $metaKeywords, // Optional
+        'new_description' => $newDescription, // Optional
         'thumbnail' => $thumbnailPath ? basename($thumbnailPath) : null, // Optional
         'video_link' => $videoLink, // Required
         'category' => $category, // Optional
@@ -140,14 +142,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         'unique_id' => $uniqueId,
         'posted_date' => $currentDate,
         'updated_date' => $currentDate,
+        'category' => $category
     ];
     file_put_contents($contentFile, json_encode($content, JSON_PRETTY_PRINT));
 
-    echo "<p class='text-green-500 px-8 pt-8'>Video information saved successfully!</p>";
+    // Add the video to the sitemap
+    $sitemapResult = addXmlEntry("/video/" . urlencode($alias), 0.7);
+
+    // Display feedback based on sitemap update
+    if ($sitemapResult) {
+        echo "<p class='text-green-500 px-8 pt-8'>Video information saved successfully and sitemap updated!</p>";
+    } else {
+        echo "<p class='text-yellow-500 px-8 pt-8'>Video saved but sitemap entry already exists!</p>";
+    }
 }
 ?>
 
-<div class="container mx-auto p-8">
+<div class="<?php echo $mainContainerClass ?>">
     <h1 class="text-3xl font-bold text-text-light mb-6">Add New Video</h1>
     <form action="" method="POST" enctype="multipart/form-data" class="bg-gray-800 shadow-lg rounded-lg p-6 space-y-6">
         <!-- Form Fields -->
@@ -179,7 +190,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <!-- Thumbnail Preview with Download -->
         <div>
             <a id="thumbnail-download-link" href="#" download="youtube_thumbnail.jpg" class="hidden">
-                <img id="youtube-thumbnail" src="" alt="Thumbnail Preview" class="w-48 h-32 mt-2 rounded cursor-pointer">
+                <img id="youtube-thumbnail" src="" alt="Thumbnail Preview" class="h-32 mt-2 rounded cursor-pointer">
             </a>
         </div>
 
@@ -244,7 +255,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </button>
             <p id="metadata-loading" class="text-gray-400 hidden">Generating metadata...</p>
         </div>
-        <script src="/js/generate-metadata.js"></script>
+        <script>
+            const script = document.createElement('script');
+            script.src = `/js/generate-metadata.js?v=${Math.floor(Math.random() * 10000)}`;
+            document.head.appendChild(script);
+        </script>
 
         <!-- Meta Title -->
         <div>
@@ -266,6 +281,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <textarea name="meta_keywords" id="meta_keywords" rows="3" 
                 class="mt-1 block w-full border-gray-600 bg-gray-700 text-text-light rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm p-2"></textarea>
         </div>
+
+        <!-- New Description for content -->
+        <div>
+            <label for="new_description" class="block text-sm font-medium text-text-light">New Description</label>
+            <textarea name="new_description" id="new_description" rows="5" 
+                class="mt-1 block w-full border-gray-600 bg-gray-700 text-text-light rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm p-2"></textarea>
+        </div>
+
 
         <!-- Additional Files -->
         <div>

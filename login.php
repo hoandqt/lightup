@@ -13,7 +13,7 @@ $redirectUrl = $_GET['redirect'] ?? '/';
 $pageTitle = "Login to LightUp.TV";
 $pageDescription = "Login to LightUp.TV";
 $pageKeywords = "";
-$canonicalURL = "https://www.lightup.tv/login";
+$canonicalURL = "https://lightup.tv/login";
 include 'header.php';
 include 'menu.php';
 ?>

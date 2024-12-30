@@ -19,11 +19,13 @@ document.getElementById('create-metadata').addEventListener('click', function() 
     })
     .then(response => response.json())
     .then(data => {
+        console.log(data);
         document.getElementById('metadata-loading').classList.add('hidden');
         if (data.success) {
             document.getElementById('meta_title').value = data.meta_title;
             document.getElementById('meta_description').value = data.meta_description;
             document.getElementById('meta_keywords').value = data.meta_keywords;
+            document.getElementById('new_description').value = data.new_content;
         } else {
             alert('Failed to generate metadata: ' + data.message);
         }

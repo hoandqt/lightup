@@ -11,8 +11,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $channelFile = __DIR__ . '/json/channel.json';
     $channels = file_exists($channelFile) ? json_decode(file_get_contents($channelFile), true) : [];
 
-    $channels[$input['id']] = $input['data'];
+    // Merge or update data for the given ID
+    if (isset($channels[$input['id']]) && is_array($channels[$input['id']])) {
+        $channels[$input['id']] = array_merge($channels[$input['id']], $input['data']);
+    } else {
+        $channels[$input['id']] = $input['data'];
+    }
 
     file_put_contents($channelFile, json_encode($channels, JSON_PRETTY_PRINT));
-    echo json_encode(['success' => true, 'channel' => $input['data']]);
+    echo json_encode(['success' => true, 'channel' => $channels[$input['id']]]);
 }

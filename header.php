@@ -2,7 +2,7 @@
 require_once "functions.php";
 
 $debug = true; // Set to false in production
-$cssVersion = $debug ? '?v=' . rand(1000, 9999) : '';
+$cssVersion = $debug ? '?v=' . rand(1, 999999) : '';
 ?>
 
 <!DOCTYPE html>
@@ -12,13 +12,31 @@ $cssVersion = $debug ? '?v=' . rand(1000, 9999) : '';
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title><?= $pageTitle ?? 'Welcome to LightUp.TV'; ?></title>
+
   <?php if (!empty($pageDescription)): ?>
-  <meta name="description" content="<?= htmlspecialchars($pageDescription); ?>">
+    <meta name="description" content="<?= $pageDescription; ?>">
+    <meta property="og:description" content="<?= $pageDescription; ?>">
   <?php endif; ?>
+
   <?php if (!empty($pageKeywords)): ?>
-  <meta name="keywords" content="<?= htmlspecialchars($pageKeywords); ?>">
+    <meta name="keywords" content="<?= $pageKeywords; ?>">
   <?php endif; ?>
+
+  <?php if (!empty($pageTitle)): ?>
+    <meta property="og:title" content="<?= $pageTitle; ?>">
+  <?php endif; ?>
+
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="<?= $canonicalURL ?? 'https://www.lightup.tv/'; ?>">
+  <?php if (!empty($ogImageURL)): ?>
+    <meta property="og:image" content="<?= htmlspecialchars($ogImageURL); ?>">
+  <?php endif; ?>
+  <?php if (!empty($ogImageAlt)): ?>
+    <meta property="og:image:alt" content="<?= htmlspecialchars($ogImageAlt); ?>">
+  <?php endif; ?>
+  <meta property="og:site_name" content="LightUp.TV">
   <link rel="canonical" href="<?= $canonicalURL ?? 'https://www.lightup.tv/'; ?>">
+
   <!-- Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-T5QQL0PXXW"></script>
   <script>
@@ -27,6 +45,7 @@ $cssVersion = $debug ? '?v=' . rand(1000, 9999) : '';
     gtag('js', new Date());
     gtag('config', 'G-T5QQL0PXXW');
   </script>
+
   <script>
     const removedFiles = [];
 
@@ -111,7 +130,7 @@ $cssVersion = $debug ? '?v=' . rand(1000, 9999) : '';
 
       const videoId = videoIdMatch[1];
       const apiKey = "<?php echo $apiKey ?>";
-      const apiUrl = `https://www.googleapis.com/youtube/v3/videos?part=snippet&id=${videoId}&key=${apiKey}`;
+      const apiUrl = `https://www.googleapis.com/youtube/v3/videos?part=snippet,contentDetails,statistics&id=${videoId}&key=${apiKey}`;
 
       try {
         const response = await fetch(apiUrl);
@@ -146,6 +165,17 @@ $cssVersion = $debug ? '?v=' . rand(1000, 9999) : '';
           await updateChannelDropdown(channelTitle);
         }
 
+        // Handle the category
+        const categoryId = data.items[0].snippet.categoryId; // Get the category ID from the API
+        if (categoryId) {
+          // Retrieve the category name based on ID using a predefined mapping
+          const categoryMap = await fetch('/json/youtube-category.json').then(res => res.json()); // Load mapping from a local JSON file or endpoint
+          const categoryName = categoryMap[categoryId] || "Unknown Category";
+
+          if (categoryName) {
+            await updateCategoryDropdown(categoryName);
+          }
+        }
       } catch (error) {
         alert("Error: " + error.message);
         console.error(error);
@@ -207,6 +237,62 @@ $cssVersion = $debug ? '?v=' . rand(1000, 9999) : '';
       }
     }
 
+    // Additional JavaScript logic if needed for categories
+    async function updateCategoryDropdown(categoryName) {
+      try {
+        // Fetch current video-category.json data
+        const response = await fetch(`/json/video-category.json?v=${Date.now()}`);
+        const categories = await response.json();
+
+        // Check if the category exists
+        let categoryExists = false;
+        let categoryId = null;
+
+        for (const id in categories) {
+          if (categories[id].name === categoryName) {
+            categoryExists = true;
+            categoryId = id;
+            break;
+          }
+        }
+
+        if (!categoryExists) {
+          // Add new category to video-category.json
+          const newId = Object.keys(categories).length + 1;
+          const newCategory = {
+            name: categoryName,
+            category_description: `Description for ${categoryName}`,
+            path_alias: categoryName.toLowerCase().replace(/[^a-z0-9]/g, '-'),
+            subcategories: []
+          };
+
+          // Send new data to server for updating
+          await fetch('update-category', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ id: newId, data: newCategory })
+          });
+
+          categoryId = newId;
+        }
+
+        // Update category dropdown
+        const categorySelect = document.getElementById('category');
+        const optionExists = [...categorySelect.options].some(option => option.value == categoryId);
+
+        if (!optionExists) {
+          const newOption = document.createElement('option');
+          newOption.value = categoryId;
+          newOption.textContent = categoryName;
+          categorySelect.appendChild(newOption);
+        }
+
+        categorySelect.value = categoryId;
+      } catch (error) {
+        console.error("Failed to update category dropdown:", error);
+      }
+    }
+
     document.addEventListener('DOMContentLoaded', () => {
       // Close the dropdown of clicking outside
       const dropdownButton = document.getElementById('dropdownButton');
@@ -246,47 +332,118 @@ $cssVersion = $debug ? '?v=' . rand(1000, 9999) : '';
 
       if (document.getElementById('cancelDelete')) {
         document.getElementById('cancelDelete').addEventListener('click', () => {
-            document.getElementById('deleteModal').classList.add('hidden');
+          document.getElementById('deleteModal').classList.add('hidden');
         });
       }
 
       if (document.getElementById('confirmDelete')) {
         document.getElementById('confirmDelete').addEventListener('click', () => {
-            fetch('/delete-video', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ unique_id: deleteUniqueId })
-            })
+          fetch('/delete-video', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ unique_id: deleteUniqueId })
+          })
             .then(response => {
-                console.log('Response:', response);
-                return response.json();
+              console.log('Response:', response);
+              return response.json();
             })
             .then(data => {
-                if (data.success) {
-                    alert('Video deleted successfully!');
-                    window.location.href = '/videos'; // Redirect to /videos
-                } else {
-                    alert('Error deleting video: ' + data.message);
-                }
+              if (data.success) {
+                alert('Video deleted successfully!');
+                window.location.href = '/videos'; // Redirect to /videos
+              } else {
+                alert('Error deleting video: ' + data.message);
+              }
             })
             .catch(error => {
-                alert('An error occurred. (1)');
-                console.error('Detailed error information:', error);
+              alert('An error occurred. (1)');
+              console.error('Detailed error information:', error);
             });
 
-            document.getElementById('deleteModal').classList.add('hidden');
+          document.getElementById('deleteModal').classList.add('hidden');
         });
-    }
+      }
 
+      // Close modal functionality
+      const closeModalButton = document.getElementById('closeModalButton');
+      if (closeModalButton) {
+        document.getElementById('closeModalButton').addEventListener('click', () => {
+          document.querySelector('.modal').classList.add('hidden');
+        });
+      }
+
+      const closeModalTopButton = document.getElementById('closeModalTopButton');
+      if (closeModalTopButton) {
+        document.getElementById('closeModalTopButton').addEventListener('click', () => {
+          document.querySelector('.modal').classList.add('hidden');
+        });
+      }
+
+      // Js to handle the top search box
+      const searchBar = document.getElementById("search-bar");
+      const dropdown = document.getElementById("search-dropdown");
+
+      let debounceTimer;
+
+      searchBar.addEventListener("input", function () {
+        const top_query = this.value.trim();
+
+        if (debounceTimer) clearTimeout(debounceTimer);
+
+        if (top_query.length < 2) {
+          dropdown.classList.add("hidden");
+          dropdown.innerHTML = "";
+          return;
+        }
+
+        // Debounce the input to reduce unnecessary requests
+        debounceTimer = setTimeout(() => {
+          fetch("/search-handler", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ top_query }),
+          })
+            .then((response) => response.json())
+            .then((data) => {
+              if (data.length > 0) {
+                dropdown.innerHTML = data
+                  .slice(0, 5) // Show only the top 5 results
+                  .map(
+                    (item) => `
+                                    <a href="${item.link}" class="result-item block px-4 py-2 hover:bg-gray-700">
+                                        ${item.title}
+                                    </a>
+                                `
+                  )
+                  .join("");
+                dropdown.classList.remove("hidden");
+              } else {
+                dropdown.innerHTML =
+                  '<p class="px-4 py-2 text-gray-400">No results found.</p>\
+                   <p class="px-4 py-2 text-gray-400"><a href="/search">Advanced Search</a></p>';
+                dropdown.classList.remove("hidden");
+              }
+            })
+            .catch((error) => {
+              console.error("Error fetching search results:", error);
+            });
+        }, 300); // Debounce delay
+      });
+
+      // Hide dropdown when clicking outside
+      document.addEventListener("click", (event) => {
+        if (!searchBar.contains(event.target) && !dropdown.contains(event.target)) {
+          dropdown.classList.add("hidden");
+        }
+      });
 
     });
 
   </script>
 
   <script src="https://cdn.tailwindcss.com"></script>
-
   <link rel="stylesheet" href="/css/style.css<?= $cssVersion; ?>">
 </head>
 

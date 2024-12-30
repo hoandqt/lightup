@@ -3,10 +3,11 @@ session_start();
 
 require_once "functions.php";
 
-$pageTitle = "Welcome to LightUp.TV";
-$pageDescription = "Explore the homepage of LightUp.TV, featuring relaxing videos, soothing sounds, and creative content for your mindfulness journey.";
+$pageTitle = "Welcome to LightUp.TV: Your Hub for Ralaxation and Inspiration";
+$pageDescription = "Discover a world of captivating visuals and enchanting sounds, crafted to inspire relaxation, mindfulness, and creativity.";
 $pageKeywords = "LightUp.TV, ambience videos, relaxing music, mindfulness, meditation, creative sounds";
-$canonicalURL = "https://www.lightup.tv/";
+$ogImageURL = "https://lightup.tv/images/background.webp";
+$canonicalURL = "https://lightup.tv/";
 include 'header.php';
 include 'menu.php';
 include 'sub-heading.php';
@@ -38,13 +39,13 @@ include 'sub-heading.php';
           <div class="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
             <div class="rounded-md shadow">
               <a href="#"
-                class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-dark-gray bg-sunset-orange md:py-4 md:text-lg md:px-10">
+                class="btn-big w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-dark-gray bg-sunset-orange md:py-4 md:text-lg md:px-10">
                 Get Started
               </a>
             </div>
             <div class="mt-3 sm:mt-0 sm:ml-3">
               <a href="#"
-                class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-sunset-yellow bg-transparent border-sunset-yellow hover:bg-sunset-orange hover:text-dark-gray md:py-4 md:text-lg md:px-10">
+                class="btn-big transparent-bg w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-sunset-yellow bg-transparent border-sunset-yellow hover:bg-sunset-orange hover:text-dark-gray md:py-4 md:text-lg md:px-10">
                 Learn More
               </a>
             </div>
@@ -56,7 +57,7 @@ include 'sub-heading.php';
 </div>
 
 <!-- Background Image -->
-<div class="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2 z-10 mt-40" id="welcome-image">
+<div class="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2 z-10 mt-0 px-4 sm:p-0 sm:mt-40" id="welcome-image">
   <img class="h-56 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full" src="images/background.webp"
     alt="Welcome Image">
 </div>

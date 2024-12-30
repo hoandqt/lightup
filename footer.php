@@ -3,5 +3,6 @@
     <p class="text-text-light text-sm">&copy; <?= date('Y'); ?> LightUp.TV. All rights reserved.</p>
   </div>
 </footer>
+
 </body>
 </html>

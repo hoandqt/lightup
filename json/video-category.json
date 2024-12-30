@@ -1,392 +1,453 @@
 {
-  "1": {
-    "name": "Film & Animation",
-    "category_description": "Explore the world of movies, animations, and creative storytelling through film and animation.",
-    "path_alias": "film-and-animation",
-    "subcategories": [{
-        "name": "Movie Trailers",
-        "category_description": "Discover the latest and most exciting trailers for upcoming movies.",
-        "path_alias": "movie-trailers"
-      },
-      {
-        "name": "Short Films",
-        "category_description": "Explore creative and artistic short films from independent creators.",
-        "path_alias": "short-films"
-      },
-      {
-        "name": "Animated Shorts",
-        "category_description": "Dive into the world of animations with short, captivating stories.",
-        "path_alias": "animated-shorts"
-      },
-      {
-        "name": "Behind-the-Scenes",
-        "category_description": "Get a glimpse behind the scenes of your favorite movies and shows.",
-        "path_alias": "behind-the-scenes"
-      }
-    ]
-  },
-  "2": {
-    "name": "Autos & Vehicles",
-    "category_description": "Discover the latest vehicles, car reviews, and everything related to the automotive world.",
-    "path_alias": "autos-and-vehicles",
-    "subcategories": [{
-        "name": "Car Reviews",
-        "category_description": "Comprehensive reviews of the latest cars and their features.",
-        "path_alias": "car-reviews"
-      },
-      {
-        "name": "Vehicle Maintenance",
-        "category_description": "Learn essential tips and tricks for maintaining your vehicle.",
-        "path_alias": "vehicle-maintenance"
-      },
-      {
-        "name": "Motorcycles",
-        "category_description": "Explore the latest motorcycles and biking adventures.",
-        "path_alias": "motorcycles"
-      },
-      {
-        "name": "Car Customization",
-        "category_description": "Discover unique car customizations and modifications.",
-        "path_alias": "car-customization"
-      }
-    ]
-  },
-  "3": {
-    "name": "Music",
-    "category_description": "Dive into a variety of music genres, performances, and music-related content.",
-    "path_alias": "music",
-    "subcategories": [{
-        "name": "Nature Sounds",
-        "category_description": "Relax with soothing sounds of nature, perfect for meditation and relaxation.",
-        "path_alias": "nature-sounds"
-      },
-      {
-        "name": "Instrumental Music",
-        "category_description": "Enjoy a variety of instrumental music, from piano to orchestral.",
-        "path_alias": "instrumental-music"
-      },
-      {
-        "name": "Live Performances",
-        "category_description": "Watch captivating live music performances from artists around the world.",
-        "path_alias": "live-performances"
-      },
-      {
-        "name": "Music Tutorials",
-        "category_description": "Learn how to play instruments or produce music with step-by-step tutorials.",
-        "path_alias": "music-tutorials"
-      }
-    ]
-  },
-  "4": {
-    "name": "Pets & Animals",
-    "category_description": "Enjoy heartwarming and educational videos about pets, wildlife, and the animal kingdom.",
-    "path_alias": "pets-and-animals",
-    "subcategories": [{
-        "name": "Pet Care",
-        "category_description": "Learn tips and tricks for taking care of your pets.",
-        "path_alias": "pet-care"
-      },
-      {
-        "name": "Wildlife",
-        "category_description": "Explore the fascinating world of wildlife and their habitats.",
-        "path_alias": "wildlife"
-      },
-      {
-        "name": "Animal Behavior",
-        "category_description": "Understand animal behavior and their unique traits.",
-        "path_alias": "animal-behavior"
-      },
-      {
-        "name": "Funny Animal Videos",
-        "category_description": "Laugh out loud with hilarious and entertaining animal clips.",
-        "path_alias": "funny-animal-videos"
-      }
-    ]
-  },
-  "5": {
-    "name": "Sports",
-    "category_description": "Stay updated with highlights, analysis, and moments from your favorite sports and athletes.",
-    "path_alias": "sports",
-    "subcategories": [{
-        "name": "Game Highlights",
-        "category_description": "Catch the best moments from recent games and matches.",
-        "path_alias": "game-highlights"
-      },
-      {
-        "name": "Player Interviews",
-        "category_description": "Hear insights and stories directly from top athletes.",
-        "path_alias": "player-interviews"
-      },
-      {
-        "name": "Sports Analysis",
-        "category_description": "In-depth analysis of games, players, and strategies.",
-        "path_alias": "sports-analysis"
-      },
-      {
-        "name": "Extreme Sports",
-        "category_description": "Experience the adrenaline rush with extreme sports adventures.",
-        "path_alias": "extreme-sports"
-      }
-    ]
-  },
-  "6": {
-    "name": "Travel & Events",
-    "category_description": "Embark on journeys around the globe and experience vibrant events and festivals.",
-    "path_alias": "travel-and-events",
-    "subcategories": [{
-        "name": "Travel Vlogs",
-        "category_description": "Follow personal journeys and adventures across the globe.",
-        "path_alias": "travel-vlogs"
-      },
-      {
-        "name": "Cultural Events",
-        "category_description": "Discover unique traditions and festivals from various cultures.",
-        "path_alias": "cultural-events"
-      },
-      {
-        "name": "Festivals",
-        "category_description": "Dive into the excitement of festivals worldwide.",
-        "path_alias": "festivals"
-      },
-      {
-        "name": "Destination Guides",
-        "category_description": "Get helpful tips and insights about travel destinations.",
-        "path_alias": "destination-guides"
-      }
-    ]
-  },
-  "7": {
-    "name": "Gaming",
-    "category_description": "Discover gaming walkthroughs, tips, and live streams from the gaming community.",
-    "path_alias": "gaming",
-    "subcategories": [{
-        "name": "Gameplay Walkthroughs",
-        "category_description": "Step-by-step walkthroughs of popular games.",
-        "path_alias": "gameplay-walkthroughs"
-      },
-      {
-        "name": "Esports",
-        "category_description": "Watch competitive gaming tournaments and leagues.",
-        "path_alias": "esports"
-      },
-      {
-        "name": "Game Reviews",
-        "category_description": "In-depth reviews of the latest video games.",
-        "path_alias": "game-reviews"
-      },
-      {
-        "name": "Gaming Tutorials",
-        "category_description": "Learn tips and tricks to improve your gameplay.",
-        "path_alias": "gaming-tutorials"
-      }
-    ]
-  },
-  "8": {
-    "name": "People & Blogs",
-    "category_description": "Connect with personal stories, lifestyle tips, and everyday experiences shared by creators.",
-    "path_alias": "people-and-blogs",
-    "subcategories": [{
-        "name": "Personal Stories",
-        "category_description": "Share and explore inspiring and personal journeys.",
-        "path_alias": "personal-stories"
-      },
-      {
-        "name": "Daily Vlogs",
-        "category_description": "Follow daily lives and activities of vloggers.",
-        "path_alias": "daily-vlogs"
-      },
-      {
-        "name": "Lifestyle Tips",
-        "category_description": "Discover tips to enhance your everyday life.",
-        "path_alias": "lifestyle-tips"
-      },
-      {
-        "name": "Inspirational Content",
-        "category_description": "Uplifting stories and messages to inspire you.",
-        "path_alias": "inspirational-content"
-      }
-    ]
-  },
-  "9": {
-    "name": "Comedy",
-    "category_description": "Laugh along with comedic sketches, stand-ups, and funny moments that brighten your day.",
-    "path_alias": "comedy",
-    "subcategories": [{
-        "name": "Stand-Up Comedy",
-        "category_description": "Enjoy hilarious stand-up performances by top comedians.",
-        "path_alias": "stand-up-comedy"
-      },
-      {
-        "name": "Parodies",
-        "category_description": "Creative and funny takes on popular content.",
-        "path_alias": "parodies"
-      },
-      {
-        "name": "Sketch Comedy",
-        "category_description": "Watch short comedic sketches and skits.",
-        "path_alias": "sketch-comedy"
-      },
-      {
-        "name": "Funny Moments",
-        "category_description": "Relive hilarious and unexpected moments.",
-        "path_alias": "funny-moments"
-      }
-    ]
-  },
-  "10": {
-    "name": "Entertainment",
-    "category_description": "Enjoy a wide range of entertaining content including shows, movies, and viral trends.",
-    "path_alias": "entertainment",
-    "subcategories": [{
-        "name": "Celebrity News",
-        "category_description": "Stay updated with the latest gossip and updates about celebrities.",
-        "path_alias": "celebrity-news"
-      },
-      {
-        "name": "Movie Reviews",
-        "category_description": "In-depth reviews and critiques of movies across genres.",
-        "path_alias": "movie-reviews"
-      },
-      {
-        "name": "TV Shows",
-        "category_description": "Catch episodes, highlights, and discussions of popular TV shows.",
-        "path_alias": "tv-shows"
-      },
-      {
-        "name": "Viral Videos",
-        "category_description": "Watch trending and viral videos from across the internet.",
-        "path_alias": "viral-videos"
-      }
-    ]
-  },
-  "11": {
-    "name": "News & Politics",
-    "category_description": "Stay informed with the latest news, political debates, and in-depth analyses.",
-    "path_alias": "news-and-politics",
-    "subcategories": [{
-        "name": "Current Events",
-        "category_description": "Updates on global and local current events.",
-        "path_alias": "current-events"
-      },
-      {
-        "name": "Political Debates",
-        "category_description": "Engaging discussions and debates on political issues.",
-        "path_alias": "political-debates"
-      },
-      {
-        "name": "World News",
-        "category_description": "Coverage of news stories and events happening worldwide.",
-        "path_alias": "world-news"
-      },
-      {
-        "name": "Local News",
-        "category_description": "Focused news coverage of local events and issues.",
-        "path_alias": "local-news"
-      }
-    ]
-  },
-  "12": {
-    "name": "Howto & Style",
-    "category_description": "Learn new skills, DIY projects, and fashion tips to elevate your style and creativity.",
-    "path_alias": "howto-and-style",
-    "subcategories": [{
-        "name": "DIY Projects",
-        "category_description": "Creative do-it-yourself projects for home and hobbies.",
-        "path_alias": "diy-projects"
-      },
-      {
-        "name": "Fashion Tips",
-        "category_description": "Advice and inspiration for enhancing your wardrobe.",
-        "path_alias": "fashion-tips"
-      },
-      {
-        "name": "Makeup Tutorials",
-        "category_description": "Step-by-step guides for creating stunning makeup looks.",
-        "path_alias": "makeup-tutorials"
-      },
-      {
-        "name": "Home Improvement",
-        "category_description": "Tips and projects for upgrading and decorating your home.",
-        "path_alias": "home-improvement"
-      }
-    ]
-  },
-  "13": {
-    "name": "Education",
-    "category_description": "Expand your knowledge with educational videos on various topics and subjects.",
-    "path_alias": "education",
-    "subcategories": [{
-        "name": "Science Experiments",
-        "category_description": "Fun and educational science experiments for all ages.",
-        "path_alias": "science-experiments"
-      },
-      {
-        "name": "Online Courses",
-        "category_description": "Access free and paid courses on various topics.",
-        "path_alias": "online-courses"
-      },
-      {
-        "name": "History Lessons",
-        "category_description": "Learn about historical events, figures, and cultures.",
-        "path_alias": "history-lessons"
-      },
-      {
-        "name": "Language Learning",
-        "category_description": "Learn new languages with practical and immersive methods.",
-        "path_alias": "language-learning"
-      }
-    ]
-  },
-  "14": {
-    "name": "Science & Technology",
-    "category_description": "Explore innovations, discoveries, and updates in science and technology.",
-    "path_alias": "science-and-technology",
-    "subcategories": [{
-        "name": "Tech Reviews",
-        "category_description": "Comprehensive reviews of the latest gadgets and technology.",
-        "path_alias": "tech-reviews"
-      },
-      {
-        "name": "Space Exploration",
-        "category_description": "Discover the wonders of space and our journey into the cosmos.",
-        "path_alias": "space-exploration"
-      },
-      {
-        "name": "Scientific Discoveries",
-        "category_description": "Learn about groundbreaking discoveries and research.",
-        "path_alias": "scientific-discoveries"
-      },
-      {
-        "name": "Coding Tutorials",
-        "category_description": "Learn programming with practical coding lessons.",
-        "path_alias": "coding-tutorials"
-      }
-    ]
-  },
-  "15": {
-    "name": "Nonprofits & Activism",
-    "category_description": "Support causes and learn about the impactful work of nonprofits and activists worldwide.",
-    "path_alias": "nonprofits-and-activism",
-    "subcategories": [{
-        "name": "Charity Campaigns",
-        "category_description": "Discover and support ongoing charity campaigns.",
-        "path_alias": "charity-campaigns"
-      },
-      {
-        "name": "Environmental Activism",
-        "category_description": "Learn about initiatives to protect and preserve the environment.",
-        "path_alias": "environmental-activism"
-      },
-      {
-        "name": "Community Projects",
-        "category_description": "Explore projects aimed at uplifting local communities.",
-        "path_alias": "community-projects"
-      },
-      {
-        "name": "Advocacy",
-        "category_description": "Support advocacy campaigns for social and global change.",
-        "path_alias": "advocacy"
-      }
-    ]
-  }
+    "1": {
+        "name": "Film & Animation",
+        "meta_title": "Film & Animation: Discover Creativity, Stories, and Art in Motion",
+        "category_description": "Explore the world of movies, animations, and creative storytelling through film and animation.",
+        "path_alias": "film-and-animation",
+        "image": "images\/category\/film-and-animation.webp",
+        "subcategories": [
+            {
+                "name": "Movie Trailers",
+                "category_description": "Discover the latest and most exciting trailers for upcoming movies.",
+                "path_alias": "movie-trailers"
+            },
+            {
+                "name": "Short Films",
+                "category_description": "Explore creative and artistic short films from independent creators.",
+                "path_alias": "short-films"
+            },
+            {
+                "name": "Animated Shorts",
+                "category_description": "Dive into the world of animations with short, captivating stories.",
+                "path_alias": "animated-shorts"
+            },
+            {
+                "name": "Behind-the-Scenes",
+                "category_description": "Get a glimpse behind the scenes of your favorite movies and shows.",
+                "path_alias": "behind-the-scenes"
+            }
+        ]
+    },
+    "2": {
+        "name": "Autos & Vehicles",
+        "meta_title": "Autos & Vehicles: Explore Cars, Trucks, Motorcycles & More",
+        "category_description": "Discover the latest vehicles, car reviews, and everything related to the automotive world.",
+        "path_alias": "autos-and-vehicles",
+        "image": "images\/category\/autos-and-vehicles.webp",
+        "subcategories": [
+            {
+                "name": "Car Reviews",
+                "category_description": "Comprehensive reviews of the latest cars and their features.",
+                "path_alias": "car-reviews"
+            },
+            {
+                "name": "Vehicle Maintenance",
+                "category_description": "Learn essential tips and tricks for maintaining your vehicle.",
+                "path_alias": "vehicle-maintenance"
+            },
+            {
+                "name": "Motorcycles",
+                "category_description": "Explore the latest motorcycles and biking adventures.",
+                "path_alias": "motorcycles"
+            },
+            {
+                "name": "Car Customization",
+                "category_description": "Discover unique car customizations and modifications.",
+                "path_alias": "car-customization"
+            }
+        ]
+    },
+    "10": {
+        "name": "Music",
+        "meta_title": "Music: Discover Songs, Artists, Genres & Playlists",
+        "category_description": "Dive into a variety of music genres, performances, and music-related content.",
+        "path_alias": "music",
+        "image": "images\/category\/music.webp",
+        "subcategories": [
+            {
+                "name": "Nature Sounds",
+                "category_description": "Relax with soothing sounds of nature, perfect for meditation and relaxation.",
+                "path_alias": "nature-sounds"
+            },
+            {
+                "name": "Instrumental Music",
+                "category_description": "Enjoy a variety of instrumental music, from piano to orchestral.",
+                "path_alias": "instrumental-music"
+            },
+            {
+                "name": "Live Performances",
+                "category_description": "Watch captivating live music performances from artists around the world.",
+                "path_alias": "live-performances"
+            },
+            {
+                "name": "Music Tutorials",
+                "category_description": "Learn how to play instruments or produce music with step-by-step tutorials.",
+                "path_alias": "music-tutorials"
+            }
+        ]
+    },
+    "15": {
+        "name": "Pets & Animals",
+        "meta_title": "Pets & Animals: Caring for Your Furry, Feathered, and Scaly Friends",
+        "category_description": "Enjoy heartwarming and educational videos about pets, wildlife, and the animal kingdom.",
+        "path_alias": "pets-and-animals",
+        "image": "images\/category\/pets-and-animals.webp",
+        "subcategories": [
+            {
+                "name": "Pet Care",
+                "category_description": "Learn tips and tricks for taking care of your pets.",
+                "path_alias": "pet-care"
+            },
+            {
+                "name": "Wildlife",
+                "category_description": "Explore the fascinating world of wildlife and their habitats.",
+                "path_alias": "wildlife"
+            },
+            {
+                "name": "Animal Behavior",
+                "category_description": "Understand animal behavior and their unique traits.",
+                "path_alias": "animal-behavior"
+            },
+            {
+                "name": "Funny Animal Videos",
+                "category_description": "Laugh out loud with hilarious and entertaining animal clips.",
+                "path_alias": "funny-animal-videos"
+            }
+        ]
+    },
+    "17": {
+        "name": "Sports",
+        "meta_title": "Sports: Scores, Highlights, News, and Action-Packed Moments",
+        "category_description": "Stay updated with highlights, analysis, and moments from your favorite sports and athletes.",
+        "path_alias": "sports",
+        "image": "images\/category\/sports.webp",
+        "subcategories": [
+            {
+                "name": "Game Highlights",
+                "category_description": "Catch the best moments from recent games and matches.",
+                "path_alias": "game-highlights"
+            },
+            {
+                "name": "Player Interviews",
+                "category_description": "Hear insights and stories directly from top athletes.",
+                "path_alias": "player-interviews"
+            },
+            {
+                "name": "Sports Analysis",
+                "category_description": "In-depth analysis of games, players, and strategies.",
+                "path_alias": "sports-analysis"
+            },
+            {
+                "name": "Extreme Sports",
+                "category_description": "Experience the adrenaline rush with extreme sports adventures.",
+                "path_alias": "extreme-sports"
+            }
+        ]
+    },
+    "18": {
+        "name": "Short Movies",
+        "meta_title": "Short Movies: Bite-Sized Stories, Big Impact",
+        "category_description": "Concise, impactful films that tell compelling stories in a limited runtime, showcasing creativity and storytelling excellence.",
+        "path_alias": "short-movies",
+        "image": "images\/category\/short-movies.webp",
+        "subcategories": []
+    },
+    "19": {
+        "name": "Travel & Events",
+        "meta_title": "Travel & Events: Explore Destinations and Memorable Experiences",
+        "category_description": "Embark on journeys around the globe and experience vibrant events and festivals.",
+        "path_alias": "travel-and-events",
+        "image": "images\/category\/travel-and-events.webp",
+        "subcategories": [
+            {
+                "name": "Travel Vlogs",
+                "category_description": "Follow personal journeys and adventures across the globe.",
+                "path_alias": "travel-vlogs"
+            },
+            {
+                "name": "Cultural Events",
+                "category_description": "Discover unique traditions and festivals from various cultures.",
+                "path_alias": "cultural-events"
+            },
+            {
+                "name": "Festivals",
+                "category_description": "Dive into the excitement of festivals worldwide.",
+                "path_alias": "festivals"
+            },
+            {
+                "name": "Destination Guides",
+                "category_description": "Get helpful tips and insights about travel destinations.",
+                "path_alias": "destination-guides"
+            }
+        ]
+    },
+    "20": {
+        "name": "Gaming",
+        "meta_title": "Gaming: Dive Into Games, Reviews, Tips, and Live Action",
+        "category_description": "Discover gaming walkthroughs, tips, and live streams from the gaming community.",
+        "path_alias": "gaming",
+        "image": "images\/category\/gaming.webp",
+        "subcategories": [
+            {
+                "name": "Gameplay Walkthroughs",
+                "category_description": "Step-by-step walkthroughs of popular games.",
+                "path_alias": "gameplay-walkthroughs"
+            },
+            {
+                "name": "Esports",
+                "category_description": "Watch competitive gaming tournaments and leagues.",
+                "path_alias": "esports"
+            },
+            {
+                "name": "Game Reviews",
+                "category_description": "In-depth reviews of the latest video games.",
+                "path_alias": "game-reviews"
+            },
+            {
+                "name": "Gaming Tutorials",
+                "category_description": "Learn tips and tricks to improve your gameplay.",
+                "path_alias": "gaming-tutorials"
+            }
+        ]
+    },
+    "21": {
+        "name": "Videoblogging",
+        "meta_title": "Videoblogging: Share Stories, Tips, and Everyday Adventures",
+        "category_description": "A personal and creative video format where creators share stories, experiences, and daily moments to connect with their audience.",
+        "path_alias": "videoblogging",
+        "image": "images\/category\/videoblogging.webp",
+        "subcategories": []
+    },
+    "22": {
+        "name": "People & Blogs",
+        "meta_title": "People & Blogs: Personal Stories, Insights, and Lifestyle Inspiration",
+        "category_description": "Connect with personal stories, lifestyle tips, and everyday experiences shared by creators.",
+        "path_alias": "people-and-blogs",
+        "image": "images\/category\/people-and-blogs.webp",
+        "subcategories": [
+            {
+                "name": "Personal Stories",
+                "category_description": "Share and explore inspiring and personal journeys.",
+                "path_alias": "personal-stories"
+            },
+            {
+                "name": "Daily Vlogs",
+                "category_description": "Follow daily lives and activities of vloggers.",
+                "path_alias": "daily-vlogs"
+            },
+            {
+                "name": "Lifestyle Tips",
+                "category_description": "Discover tips to enhance your everyday life.",
+                "path_alias": "lifestyle-tips"
+            },
+            {
+                "name": "Inspirational Content",
+                "category_description": "Uplifting stories and messages to inspire you.",
+                "path_alias": "inspirational-content"
+            }
+        ]
+    },
+    "23": {
+        "name": "Comedy",
+        "meta_title": "Comedy: Laugh Out Loud with Jokes, Skits, and Funny Moments",
+        "category_description": "Laugh along with comedic sketches, stand-ups, and funny moments that brighten your day.",
+        "path_alias": "comedy",
+        "image": "images\/category\/comedy.webp",
+        "subcategories": [
+            {
+                "name": "Stand-Up Comedy",
+                "category_description": "Enjoy hilarious stand-up performances by top comedians.",
+                "path_alias": "stand-up-comedy"
+            },
+            {
+                "name": "Parodies",
+                "category_description": "Creative and funny takes on popular content.",
+                "path_alias": "parodies"
+            },
+            {
+                "name": "Sketch Comedy",
+                "category_description": "Watch short comedic sketches and skits.",
+                "path_alias": "sketch-comedy"
+            },
+            {
+                "name": "Funny Moments",
+                "category_description": "Relive hilarious and unexpected moments.",
+                "path_alias": "funny-moments"
+            }
+        ]
+    },
+    "24": {
+        "name": "Entertainment",
+        "meta_title": "Entertainment: Movies, Shows, Music, and Pop Culture Fun",
+        "category_description": "Dive into a variety of music genres, performances, and music-related content.",
+        "path_alias": "entertainment",
+        "image": "images\/category\/entertainment.webp",
+        "subcategories": [
+            {
+                "name": "Celebrity News",
+                "category_description": "Stay updated with the latest gossip and updates about celebrities.",
+                "path_alias": "celebrity-news"
+            },
+            {
+                "name": "Movie Reviews",
+                "category_description": "In-depth reviews and critiques of movies across genres.",
+                "path_alias": "movie-reviews"
+            },
+            {
+                "name": "TV Shows",
+                "category_description": "Catch episodes, highlights, and discussions of popular TV shows.",
+                "path_alias": "tv-shows"
+            },
+            {
+                "name": "Viral Videos",
+                "category_description": "Watch trending and viral videos from across the internet.",
+                "path_alias": "viral-videos"
+            }
+        ]
+    },
+    "25": {
+        "name": "News & Politics",
+        "meta_title": "News & Politics: Stay Informed with the Latest Updates and Insights",
+        "category_description": "Stay informed with the latest news, political debates, and in-depth analyses.",
+        "path_alias": "news-and-politics",
+        "image": "images\/category\/news-and-politics.webp",
+        "subcategories": [
+            {
+                "name": "Current Events",
+                "category_description": "Updates on global and local current events.",
+                "path_alias": "current-events"
+            },
+            {
+                "name": "Political Debates",
+                "category_description": "Engaging discussions and debates on political issues.",
+                "path_alias": "political-debates"
+            },
+            {
+                "name": "World News",
+                "category_description": "Coverage of news stories and events happening worldwide.",
+                "path_alias": "world-news"
+            },
+            {
+                "name": "Local News",
+                "category_description": "Focused news coverage of local events and issues.",
+                "path_alias": "local-news"
+            }
+        ]
+    },
+    "26": {
+        "name": "Howto & Style",
+        "meta_title": "How-To & Style: Tips, Tutorials, and Fashion Inspiration",
+        "category_description": "Learn new skills, DIY projects, and fashion tips to elevate your style and creativity.",
+        "path_alias": "howto-and-style",
+        "image": "images\/category\/howto-and-style.webp",
+        "subcategories": [
+            {
+                "name": "DIY Projects",
+                "category_description": "Creative do-it-yourself projects for home and hobbies.",
+                "path_alias": "diy-projects"
+            },
+            {
+                "name": "Fashion Tips",
+                "category_description": "Advice and inspiration for enhancing your wardrobe.",
+                "path_alias": "fashion-tips"
+            },
+            {
+                "name": "Makeup Tutorials",
+                "category_description": "Step-by-step guides for creating stunning makeup looks.",
+                "path_alias": "makeup-tutorials"
+            },
+            {
+                "name": "Home Improvement",
+                "category_description": "Tips and projects for upgrading and decorating your home.",
+                "path_alias": "home-improvement"
+            }
+        ]
+    },
+    "27": {
+        "name": "Education",
+        "meta_title": "Education: Learn, Grow, and Explore New Knowledge",
+        "category_description": "Expand your knowledge with educational videos on various topics and subjects.",
+        "path_alias": "education",
+        "image": "images\/category\/education.webp",
+        "subcategories": [
+            {
+                "name": "Science Experiments",
+                "category_description": "Fun and educational science experiments for all ages.",
+                "path_alias": "science-experiments"
+            },
+            {
+                "name": "Online Courses",
+                "category_description": "Access free and paid courses on various topics.",
+                "path_alias": "online-courses"
+            },
+            {
+                "name": "History Lessons",
+                "category_description": "Learn about historical events, figures, and cultures.",
+                "path_alias": "history-lessons"
+            },
+            {
+                "name": "Language Learning",
+                "category_description": "Learn new languages with practical and immersive methods.",
+                "path_alias": "language-learning"
+            }
+        ]
+    },
+    "28": {
+        "name": "Science & Technology",
+        "meta_title": "Science & Technology: Innovations, Discoveries, and Future Trends",
+        "category_description": "Explore innovations, discoveries, and updates in science and technology.",
+        "path_alias": "science-and-technology",
+        "image": "images\/category\/science-and-technology.webp",
+        "subcategories": [
+            {
+                "name": "Tech Reviews",
+                "category_description": "Comprehensive reviews of the latest gadgets and technology.",
+                "path_alias": "tech-reviews"
+            },
+            {
+                "name": "Space Exploration",
+                "category_description": "Discover the wonders of space and our journey into the cosmos.",
+                "path_alias": "space-exploration"
+            },
+            {
+                "name": "Scientific Discoveries",
+                "category_description": "Learn about groundbreaking discoveries and research.",
+                "path_alias": "scientific-discoveries"
+            },
+            {
+                "name": "Coding Tutorials",
+                "category_description": "Learn programming with practical coding lessons.",
+                "path_alias": "coding-tutorials"
+            }
+        ]
+    },
+    "29": {
+        "name": "Nonprofits & Activism",
+        "meta_title": "Nonprofits & Activism: Driving Change, Supporting Communities",
+        "category_description": "Support causes and learn about the impactful work of nonprofits and activists worldwide.",
+        "path_alias": "nonprofits-and-activism",
+        "image": "images\/category\/nonprofits-and-activism.webp",
+        "subcategories": [
+            {
+                "name": "Charity Campaigns",
+                "category_description": "Discover and support ongoing charity campaigns.",
+                "path_alias": "charity-campaigns"
+            },
+            {
+                "name": "Environmental Activism",
+                "category_description": "Learn about initiatives to protect and preserve the environment.",
+                "path_alias": "environmental-activism"
+            },
+            {
+                "name": "Community Projects",
+                "category_description": "Explore projects aimed at uplifting local communities.",
+                "path_alias": "community-projects"
+            },
+            {
+                "name": "Advocacy",
+                "category_description": "Support advocacy campaigns for social and global change.",
+                "path_alias": "advocacy"
+            }
+        ]
+    }
 }

@@ -4,13 +4,13 @@ http_response_code(404);
 $pageTitle = "Page Not Found";
 $pageDescription = "Page Not Found - LightUp.TV";
 $pageKeywords = "";
-$canonicalURL = "https://www.lightup.tv/add-video.php";
+$canonicalURL = "https://lightup.tv/404";
 include 'header.php';
 include 'menu.php';
 include 'sub-heading.php';
 ?>
 
-<div class="container mx-auto p-8 error-container">
+<div class="<?php echo $mainContainerClass ?> error-container">
     <h1 class="text-3xl font-bold text-text-light mb-6">Page Not Found</h1>
     <p>Sorry, the page you're looking for doesn't exist.</p>
     <a href="/" style="text-decoration: none;" class="inline-flex gap-2 items-center mt-5">

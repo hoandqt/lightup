@@ -10,13 +10,13 @@ document.getElementById('generateAltBtn').addEventListener('click', function () 
     document.getElementById('content-loading').classList.remove('hidden');
 
     // Send a POST request using Fetch
-    fetch('generate-alt', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded',
-        },
-        body: new URLSearchParams({ imageUrl: imageUrl })
-    })
+    fetch('/ajax/generate-alt', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+            body: new URLSearchParams({ imageUrl: imageUrl })
+        })
         .then(response => {
             if (!response.ok) {
                 throw new Error('Network response was not ok');

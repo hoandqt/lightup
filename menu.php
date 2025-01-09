@@ -37,7 +37,9 @@
             <a href="#" class="text-text-light hover:text-sunset-yellow px-3 py-2 rounded-md text-sm font-medium inline-block">Create</a>
             <div class="menu-item-wrapper absolute hidden bg-dark-gray border border-gray-700 mt-2 shadow-lg z-40">
               <a href="/add-video" class="block px-4 py-2 text-text-light hover:bg-sunset-yellow <?php echo $currentPage === '/add-video' ? 'active' : ''; ?>">Add Video</a>
-              <a href="/add-post" class="block px-4 py-2 text-text-light hover:bg-sunset-yellow <?php echo $currentPage === '/add-blog' ? 'active' : ''; ?>">Add Blog Post</a>
+              <a href="/add-post" class="block px-4 py-2 text-text-light hover:bg-sunset-yellow <?php echo $currentPage === '/add-post' ? 'active' : ''; ?>">Add Blog Post</a>
+              <a href="/add-playlist" class="block px-4 py-2 text-text-light hover:bg-sunset-yellow <?php echo $currentPage === '/add-playlist' ? 'active' : ''; ?>">Add Playlist</a>
+              <a href="/yt-playlist" class="block px-4 py-2 text-text-light hover:bg-sunset-yellow rounded-b-md <?php echo $currentPage === '/yt-playlist' ? 'active' : ''; ?>">YT Playlist</a>
               <a href="/helper/extract-video-image" class="block px-4 py-2 text-text-light hover:bg-sunset-yellow <?php echo $currentPage === '/helper/extract-video-image' ? 'active' : ''; ?>">Extract Video Image</a>
               <a href="/manage-sitemap" class="block px-4 py-2 text-text-light hover:bg-sunset-yellow rounded-b-md <?php echo $currentPage === '/manage-sitemap' ? 'active' : ''; ?>">Sitemap</a>
             </div>
@@ -75,7 +77,8 @@
     <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true): ?>
       <div class="block">
         <a href="/add-video" class="block px-3 py-2 text-text-light hover:bg-sunset-yellow rounded-md <?php echo $currentPage === '/add-video' ? 'active' : ''; ?>">Add Video</a>
-        <a href="/add-blog" class="block px-3 py-2 text-text-light hover:bg-sunset-yellow rounded-md <?php echo $currentPage === '/add-blog' ? 'active' : ''; ?>">Add Blog Post</a>
+        <a href="/add-post" class="block px-3 py-2 text-text-light hover:bg-sunset-yellow rounded-md <?php echo $currentPage === '/add-post' ? 'active' : ''; ?>">Add Blog Post</a>
+        <a href="/add-playlist" class="block px-3 py-2 text-text-light hover:bg-sunset-yellow rounded-md <?php echo $currentPage === '/add-playlist' ? 'active' : ''; ?>">Add Playlist</a>
         <a href="/helper/extract-video-image" class="block px-3 py-2 text-text-light hover:bg-sunset-yellow rounded-md <?php echo $currentPage === '/helper/extract-video-image' ? 'active' : ''; ?>">Extract Video Image</a>
         <a href="/manage-sitemap" class="block px-3 py-2 text-text-light hover:bg-sunset-yellow rounded-md <?php echo $currentPage === '/manage-sitemap' ? 'active' : ''; ?>">Sitemap</a>
       </div>

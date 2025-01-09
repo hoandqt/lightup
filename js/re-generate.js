@@ -28,7 +28,7 @@ function regenerate(type, selector, element) {
   document.getElementById('content-loading').textContent = 'Working on content...';
   document.getElementById('content-loading').classList.remove('hidden');
 
-  fetch('/re-generate', {
+  fetch('/ajax/re-generate', {
       method: 'POST',
       headers: {
           'Content-Type': 'application/json',

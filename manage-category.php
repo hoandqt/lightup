@@ -84,7 +84,7 @@ $categoriesData = json_decode(file_get_contents($categoriesFile), true);
     </button>
 
     <h2 id="modalTitle" class="text-2xl font-bold mb-4">Add Category</h2>
-    <form id="categoryForm" action="category-action" method="POST" enctype="multipart/form-data">
+    <form id="categoryForm" action="/ajax/category-action" method="POST" enctype="multipart/form-data">
       <input type="hidden" id="oldCategoryId" name="old_id">
       <input type="hidden" id="modalAction" name="action" value="add">
       <div class="mb-4">

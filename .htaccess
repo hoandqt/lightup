@@ -3,7 +3,7 @@
 #
 
 # Protect files and directories from prying eyes.
-<FilesMatch "\.(engine|inc|install|make|module|profile|po|sh|.*sql|theme|twig|tpl(\.php)?|xtmpl|yml)(~|\.sw[op]|\.bak|\.orig|\.save)?$|^(\.(?!well-known).*|Entries.*|Repository|Root|Tag|Template|composer\.(json|lock))$|^#.*#$|\.php(~|\.sw[op]|\.bak|\.orig|\.save)$">
+<FilesMatch "\.(log|engine|inc|install|make|module|profile|po|sh|.*sql|theme|twig|tpl(\.php)?|xtmpl|yml)(~|\.sw[op]|\.bak|\.orig|\.save)?$|^(\.(?!well-known).*|Entries.*|Repository|Root|Tag|Template|composer\.(json|lock))$|^#.*#$|\.php(~|\.sw[op]|\.bak|\.orig|\.save)$">
   <IfModule mod_authz_core.c>
     Require all denied
   </IfModule>
@@ -125,7 +125,21 @@ AddEncoding gzip svgz
   # Redirect /video/[alias] to video.php with alias as a GET parameter
   RewriteRule ^video/([^/]+)/?$ video.php?alias=$1 [L,QSA]
   RewriteRule ^post/([^/]+)/?$ post.php?alias=$1 [L,QSA]
+  RewriteRule ^playlist/([^/]+)/?$ playlist.php?alias=$1 [L,QSA]
   RewriteRule ^video-category/([^/]+)/?$ video-category.php?alias=$1 [L,QSA]
+  RewriteRule ^post-category/([^/]+)/?$ post-category.php?alias=$1 [L,QSA]
+  RewriteRule ^playlist-category/([^/]+)/?$ playlist-category.php?alias=$1 [L,QSA]
+
+  # Handle invalid paths: /video/abc/def/ghi
+  RewriteRule ^video/.+/.*$ - [R=404,L]
+  RewriteRule ^post/.+/.*$ - [R=404,L]
+  RewriteRule ^playlist/.+/.*$ - [R=404,L]
+  RewriteRule ^video-category/.+/.*$ - [R=404,L]
+  RewriteRule ^post-category/.+/.*$ - [R=404,L]
+  RewriteRule ^playlist-category/.+/.*$ - [R=404,L]
+  RewriteRule ^videos/.*$ - [R=404,L]
+  RewriteRule ^posts/.*$ - [R=404,L]
+  RewriteRule ^playlist/.*$ - [R=404,L]
 
   # Redirect requests without .php to their corresponding .php files
   RewriteCond %{REQUEST_FILENAME}.php -f
@@ -174,8 +188,26 @@ AddEncoding gzip svgz
   # Deny access to any other PHP files that do not match the rules above.
   # Specifically, disallow autoload.php from being served directly.
   RewriteCond %{REQUEST_URI} !/helper/extract-video-image?.php
+  RewriteCond %{REQUEST_URI} !/ajax/delete-thumbnail?.php
+  RewriteCond %{REQUEST_URI} !/ajax/create-video?.php
+  RewriteCond %{REQUEST_URI} !/ajax/delete-video?.php
   RewriteCond %{REQUEST_URI} !/ajax/load-content?.php
-  RewriteCond %{REQUEST_URI} !/dev-1/lightup/*
+  RewriteCond %{REQUEST_URI} !/ajax/fetch-playlist?.php
+  RewriteCond %{REQUEST_URI} !/ajax/fetch-subcategories?.php
+  RewriteCond %{REQUEST_URI} !/ajax/update-category?.php
+  RewriteCond %{REQUEST_URI} !/ajax/update-channel?.php
+  RewriteCond %{REQUEST_URI} !/ajax/fetch-channel-handle?.php
+  RewriteCond %{REQUEST_URI} !/ajax/generate-metadata?.php
+  RewriteCond %{REQUEST_URI} !/ajax/generate-alt?.php
+  RewriteCond %{REQUEST_URI} !/ajax/re-generate?.php
+  RewriteCond %{REQUEST_URI} !/ajax/get-sitemap-entries?.php
+  RewriteCond %{REQUEST_URI} !/ajax/search-handler?.php
+  RewriteCond %{REQUEST_URI} !/ajax/add-xml-entry?.php
+  RewriteCond %{REQUEST_URI} !/ajax/edit-xml-entry?.php
+  RewriteCond %{REQUEST_URI} !/ajax/delete-xml-entry?.php
+  RewriteCond %{REQUEST_URI} !/ajax/category-action?.php
+  RewriteCond %{REQUEST_URI} !/ajax/generate-details?.php
+  RewriteCond %{REQUEST_URI} !/ajax/modify-playlist-handler?.php
   RewriteRule "^(.+/.*|autoload)\.php($|/)" - [F]
 
   # Rules to correctly serve gzip compressed CSS and JS files.

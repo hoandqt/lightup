@@ -1,0 +1,420 @@
+{
+  "1": {
+    "name": "Film & Animation Playlist",
+    "category_description": "Explore playlists of movies, animations, and creative storytelling.",
+    "path_alias": "film-and-animation",
+    "image": "images/category/film-and-animation.webp",
+    "subcategories": [
+      {
+        "name": "Movie Trailers Playlist",
+        "category_description": "Discover playlists of exciting trailers for upcoming movies.",
+        "path_alias": "movie-trailers"
+      },
+      {
+        "name": "Short Films Playlist",
+        "category_description": "Browse playlists of creative short films by independent creators.",
+        "path_alias": "short-films"
+      },
+      {
+        "name": "Animated Shorts Playlist",
+        "category_description": "Explore playlists of short, captivating animated stories.",
+        "path_alias": "animated-shorts"
+      },
+      {
+        "name": "Behind-the-Scenes Playlist",
+        "category_description": "Dive into playlists of behind-the-scenes footage from movies.",
+        "path_alias": "behind-the-scenes"
+      }
+    ]
+  },
+  "2": {
+    "name": "Autos & Vehicles Playlist",
+    "category_description": "Browse playlists featuring cars, reviews, and vehicle maintenance tips.",
+    "path_alias": "autos-and-vehicles",
+    "subcategories": [
+      {
+        "name": "Car Reviews Playlist",
+        "category_description": "Explore playlists with reviews of the latest cars and features.",
+        "path_alias": "car-reviews"
+      },
+      {
+        "name": "Vehicle Maintenance Playlist",
+        "category_description": "Learn from playlists with essential vehicle maintenance tips.",
+        "path_alias": "vehicle-maintenance"
+      },
+      {
+        "name": "Motorcycles Playlist",
+        "category_description": "Discover playlists about the latest motorcycles and adventures.",
+        "path_alias": "motorcycles"
+      },
+      {
+        "name": "Car Customization Playlist",
+        "category_description": "Find playlists of unique car customizations and modifications.",
+        "path_alias": "car-customization"
+      }
+    ]
+  },
+  "10": {
+    "name": "Music Playlist",
+    "category_description": "Discover playlists featuring diverse music genres and performances.",
+    "path_alias": "music",
+    "subcategories": [
+      {
+        "name": "Nature Sounds Playlist",
+        "category_description": "Relax with playlists of soothing nature sounds for meditation.",
+        "path_alias": "nature-sounds"
+      },
+      {
+        "name": "Instrumental Music Playlist",
+        "category_description": "Enjoy playlists of instrumental music, from piano to orchestral.",
+        "path_alias": "instrumental-music"
+      },
+      {
+        "name": "Live Performances Playlist",
+        "category_description": "Watch playlists of captivating live music performances.",
+        "path_alias": "live-performances"
+      },
+      {
+        "name": "Music Tutorials Playlist",
+        "category_description": "Learn from playlists of step-by-step music tutorials.",
+        "path_alias": "music-tutorials"
+      }
+    ]
+  },
+  "15": {
+    "name": "Pets & Animals Playlist",
+    "category_description": "Explore playlists featuring pets, wildlife, and animal behaviors.",
+    "path_alias": "pets-and-animals",
+    "subcategories": [
+      {
+        "name": "Pet Care Playlist",
+        "category_description": "Discover playlists with tips and advice for pet care.",
+        "path_alias": "pet-care"
+      },
+      {
+        "name": "Wildlife Playlist",
+        "category_description": "Enjoy playlists of fascinating wildlife and their habitats.",
+        "path_alias": "wildlife"
+      },
+      {
+        "name": "Animal Behavior Playlist",
+        "category_description": "Understand animal behavior through curated playlists.",
+        "path_alias": "animal-behavior"
+      },
+      {
+        "name": "Funny Animal Videos Playlist",
+        "category_description": "Laugh with playlists of entertaining and funny animal clips.",
+        "path_alias": "funny-animal-videos"
+      }
+    ]
+  },
+  "17": {
+    "name": "Sports Playlist",
+    "category_description": "Stay active with playlists featuring sports highlights and analysis.",
+    "path_alias": "sports",
+    "subcategories": [
+      {
+        "name": "Game Highlights Playlist",
+        "category_description": "Watch playlists of exciting highlights from recent games.",
+        "path_alias": "game-highlights"
+      },
+      {
+        "name": "Player Interviews Playlist",
+        "category_description": "Explore playlists featuring interviews with top athletes.",
+        "path_alias": "player-interviews"
+      },
+      {
+        "name": "Sports Analysis Playlist",
+        "category_description": "Dive into playlists with in-depth sports analysis and strategies.",
+        "path_alias": "sports-analysis"
+      },
+      {
+        "name": "Extreme Sports Playlist",
+        "category_description": "Experience playlists of adrenaline-filled extreme sports moments.",
+        "path_alias": "extreme-sports"
+      }
+    ]
+  },
+  "18": {
+    "name": "Short Movies Playlist",
+    "category_description": "Enjoy playlists of impactful and creative short films.",
+    "path_alias": "short-movies",
+    "subcategories": []
+  },
+  "19": {
+    "name": "Travel & Events Playlist",
+    "category_description": "Explore playlists featuring travel journeys and vibrant events.",
+    "path_alias": "travel-and-events",
+    "subcategories": [
+      {
+        "name": "Travel Vlogs Playlist",
+        "category_description": "Follow playlists of personal journeys and adventures worldwide.",
+        "path_alias": "travel-vlogs"
+      },
+      {
+        "name": "Cultural Events Playlist",
+        "category_description": "Discover playlists of unique traditions and festivals.",
+        "path_alias": "cultural-events"
+      },
+      {
+        "name": "Festivals Playlist",
+        "category_description": "Dive into playlists celebrating festivals across the globe.",
+        "path_alias": "festivals"
+      },
+      {
+        "name": "Destination Guides Playlist",
+        "category_description": "Get playlists with tips and insights about travel destinations.",
+        "path_alias": "destination-guides"
+      }
+    ]
+  },
+  "20": {
+    "name": "Gaming Playlist",
+    "category_description": "Explore playlists featuring walkthroughs, reviews, and gaming tips.",
+    "path_alias": "gaming",
+    "subcategories": [
+      {
+        "name": "Gameplay Walkthroughs Playlist",
+        "category_description": "Watch playlists of step-by-step walkthroughs for popular games.",
+        "path_alias": "gameplay-walkthroughs"
+      },
+      {
+        "name": "Esports Playlist",
+        "category_description": "Discover playlists of competitive gaming tournaments.",
+        "path_alias": "esports"
+      },
+      {
+        "name": "Game Reviews Playlist",
+        "category_description": "Browse playlists of in-depth reviews of video games.",
+        "path_alias": "game-reviews"
+      },
+      {
+        "name": "Gaming Tutorials Playlist",
+        "category_description": "Learn from playlists of tutorials to improve your gaming skills.",
+        "path_alias": "gaming-tutorials"
+      }
+    ]
+  },
+  "21": {
+    "name": "Videoblogging Playlist",
+    "category_description": "Explore playlists of creative personal stories and moments.",
+    "path_alias": "videoblogging",
+    "subcategories": []
+  },
+  "22": {
+    "name": "People & Blogs Playlist",
+    "category_description": "Connect with playlists featuring personal stories and tips.",
+    "path_alias": "people-and-blogs",
+    "subcategories": [
+      {
+        "name": "Personal Stories Playlist",
+        "category_description": "Browse playlists of inspiring and personal journeys.",
+        "path_alias": "personal-stories"
+      },
+      {
+        "name": "Daily Vlogs Playlist",
+        "category_description": "Follow playlists of vloggers' daily lives and activities.",
+        "path_alias": "daily-vlogs"
+      },
+      {
+        "name": "Lifestyle Tips Playlist",
+        "category_description": "Discover playlists of tips to enhance everyday life.",
+        "path_alias": "lifestyle-tips"
+      },
+      {
+        "name": "Inspirational Content Playlist",
+        "category_description": "Find playlists of uplifting and motivational content.",
+        "path_alias": "inspirational-content"
+      }
+    ]
+  },
+  "23": {
+    "name": "Comedy Playlist",
+    "category_description": "Laugh with playlists of sketches, stand-ups, and funny moments.",
+    "path_alias": "comedy",
+    "subcategories": [
+      {
+        "name": "Stand-Up Comedy Playlist",
+        "category_description": "Enjoy playlists of hilarious stand-up performances.",
+        "path_alias": "stand-up-comedy"
+      },
+      {
+        "name": "Parodies Playlist",
+        "category_description": "Explore playlists of creative and funny parodies.",
+        "path_alias": "parodies"
+      },
+      {
+        "name": "Sketch Comedy Playlist",
+        "category_description": "Watch playlists of short comedic sketches and skits.",
+        "path_alias": "sketch-comedy"
+      },
+      {
+        "name": "Funny Moments Playlist",
+        "category_description": "Laugh along with playlists of hilarious and unexpected moments.",
+        "path_alias": "funny-moments"
+      }
+    ]
+  },
+  "24": {
+    "name": "Entertainment Playlist",
+    "category_description": "Discover playlists featuring music, shows, and celebrity content.",
+    "path_alias": "entertainment",
+    "subcategories": [
+      {
+        "name": "Celebrity News Playlist",
+        "category_description": "Browse playlists with the latest updates on celebrities.",
+        "path_alias": "celebrity-news"
+      },
+      {
+        "name": "Movie Reviews Playlist",
+        "category_description": "Explore playlists of detailed critiques of movies.",
+        "path_alias": "movie-reviews"
+      },
+      {
+        "name": "TV Shows Playlist",
+        "category_description": "Dive into playlists with highlights from popular TV shows.",
+        "path_alias": "tv-shows"
+      },
+      {
+        "name": "Viral Videos Playlist",
+        "category_description": "Watch trending playlists of viral videos from the web.",
+        "path_alias": "viral-videos"
+      }
+    ]
+  },
+  "25": {
+    "name": "News & Politics Playlist",
+    "category_description": "Stay informed with playlists of news and political discussions.",
+    "path_alias": "news-and-politics",
+    "subcategories": [
+      {
+        "name": "Current Events Playlist",
+        "category_description": "Explore playlists of updates on global current events.",
+        "path_alias": "current-events"
+      },
+      {
+        "name": "Political Debates Playlist",
+        "category_description": "Watch playlists of engaging political discussions.",
+        "path_alias": "political-debates"
+      },
+      {
+        "name": "World News Playlist",
+        "category_description": "Stay updated with playlists covering global news.",
+        "path_alias": "world-news"
+      },
+      {
+        "name": "Local News Playlist",
+        "category_description": "Follow playlists of focused coverage of local news.",
+        "path_alias": "local-news"
+      }
+    ]
+  },
+  "26": {
+    "name": "Howto & Style Playlist",
+    "category_description": "Learn and create with playlists on DIY, fashion, and makeup tips.",
+    "path_alias": "howto-and-style",
+    "subcategories": [
+      {
+        "name": "DIY Projects Playlist",
+        "category_description": "Explore playlists of creative do-it-yourself projects.",
+        "path_alias": "diy-projects"
+      },
+      {
+        "name": "Fashion Tips Playlist",
+        "category_description": "Find playlists for enhancing your personal style.",
+        "path_alias": "fashion-tips"
+      },
+      {
+        "name": "Makeup Tutorials Playlist",
+        "category_description": "Learn with playlists of step-by-step makeup guides.",
+        "path_alias": "makeup-tutorials"
+      },
+      {
+        "name": "Home Improvement Playlist",
+        "category_description": "Discover playlists for upgrading and decorating your home.",
+        "path_alias": "home-improvement"
+      }
+    ]
+  },
+  "27": {
+    "name": "Education Playlist",
+    "category_description": "Expand your knowledge with playlists on diverse topics.",
+    "path_alias": "education",
+    "subcategories": [
+      {
+        "name": "Science Experiments Playlist",
+        "category_description": "Discover playlists of fun and educational science experiments.",
+        "path_alias": "science-experiments"
+      },
+      {
+        "name": "Online Courses Playlist",
+        "category_description": "Access playlists of free and paid online courses.",
+        "path_alias": "online-courses"
+      },
+      {
+        "name": "History Lessons Playlist",
+        "category_description": "Learn from playlists covering historical events and cultures.",
+        "path_alias": "history-lessons"
+      },
+      {
+        "name": "Language Learning Playlist",
+        "category_description": "Explore playlists to learn new languages effectively.",
+        "path_alias": "language-learning"
+      }
+    ]
+  },
+  "28": {
+    "name": "Science & Technology Playlist",
+    "category_description": "Stay updated with playlists on science and technology.",
+    "path_alias": "science-and-technology",
+    "subcategories": [
+      {
+        "name": "Tech Reviews Playlist",
+        "category_description": "Watch playlists with reviews of the latest gadgets.",
+        "path_alias": "tech-reviews"
+      },
+      {
+        "name": "Space Exploration Playlist",
+        "category_description": "Discover playlists about our journey into the cosmos.",
+        "path_alias": "space-exploration"
+      },
+      {
+        "name": "Scientific Discoveries Playlist",
+        "category_description": "Explore playlists on groundbreaking discoveries.",
+        "path_alias": "scientific-discoveries"
+      },
+      {
+        "name": "Coding Tutorials Playlist",
+        "category_description": "Learn from playlists with practical coding lessons.",
+        "path_alias": "coding-tutorials"
+      }
+    ]
+  },
+  "29": {
+    "name": "Nonprofits & Activism Playlist",
+    "category_description": "Support causes with playlists from nonprofits and activists.",
+    "path_alias": "nonprofits-and-activism",
+    "subcategories": [
+      {
+        "name": "Charity Campaigns Playlist",
+        "category_description": "Find playlists about impactful charity campaigns.",
+        "path_alias": "charity-campaigns"
+      },
+      {
+        "name": "Environmental Activism Playlist",
+        "category_description": "Explore playlists of initiatives to protect the environment.",
+        "path_alias": "environmental-activism"
+      },
+      {
+        "name": "Community Projects Playlist",
+        "category_description": "Discover playlists of uplifting community projects.",
+        "path_alias": "community-projects"
+      },
+      {
+        "name": "Advocacy Playlist",
+        "category_description": "Support advocacy campaigns through engaging playlists.",
+        "path_alias": "advocacy"
+      }
+    ]
+  }
+}

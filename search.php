@@ -60,7 +60,7 @@ document.getElementById('searchInput').addEventListener('input', function() {
         return;
     }
 
-    fetch('/search-handler', {
+    fetch('/ajax/search-handler', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ query })
@@ -96,7 +96,7 @@ document.getElementById('searchForm').addEventListener('submit', function(event)
         history.pushState(null, '', url);
 
         // Fetch search results
-        fetch('/search-handler', {
+        fetch('/ajax/search-handler', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ query })
@@ -129,7 +129,7 @@ document.getElementById('searchForm').addEventListener('submit', function(event)
             document.getElementById('searchInput').value = query;
 
             // Trigger the search request
-            fetch('/search-handler', {
+            fetch('/ajax/search-handler', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ query })

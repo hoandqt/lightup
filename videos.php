@@ -34,11 +34,28 @@ if (!file_exists($contentFile)) {
         return strtotime($b['updated_date']) - strtotime($a['updated_date']);
     });
 
+    // Filter out private videos for non-admin users
+    $filteredVideos = array_filter($videos, function ($video)  {
+        $videoFile = __DIR__ . '/item-data/' . $video['unique_id'] . '/' . $video['unique_id'] . '.json';
+        if (!file_exists($videoFile)) {
+            return false; // Exclude videos with missing details
+        }
+
+        $videoDetails = json_decode(file_get_contents($videoFile), true);
+
+        // Skip private videos for public users
+        if (isset($videoDetails['visibility']) && $videoDetails['visibility'] === 'private') {
+            return isset($_SESSION['role']) && $_SESSION['role'] === 'admin';
+        }
+
+        return true; // Include other videos
+    });
+
     // Calculate pagination
-    $totalVideos = count($videos);
+    $totalVideos = count($filteredVideos);
     $totalPages = ceil($totalVideos / $itemsPerPage);
     $offset = ($currentPage - 1) * $itemsPerPage;
-    $currentVideos = array_slice($videos, $offset, $itemsPerPage);
+    $currentVideos = array_slice($filteredVideos, $offset, $itemsPerPage);
     ?>
 
     <div class="<?php echo $mainContainerClass ?>">
@@ -115,6 +132,14 @@ if (!file_exists($contentFile)) {
                     continue;
                 }
                 $videoDetails = json_decode(file_get_contents($videoFile), true);
+                
+                // Skip private videos for public users
+                if (isset($videoDetails['visibility'])) {
+                    if ($videoDetails['visibility'] === 'private' && (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin')) {
+                        continue;
+                    }
+                }
+
                 if (!empty($videoDetails['meta_description'])) {
                     $description = $videoDetails['meta_description'];
                 }

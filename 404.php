@@ -7,7 +7,6 @@ $pageKeywords = "";
 $canonicalURL = "https://lightup.tv/404";
 include 'header.php';
 include 'menu.php';
-include 'sub-heading.php';
 ?>
 
 <div class="<?php echo $mainContainerClass ?> error-container">

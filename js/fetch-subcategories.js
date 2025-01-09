@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
       subcategoryContainer.classList.remove('hidden');
 
       // Fetch subcategories via AJAX
-      fetch(`/fetch-subcategories?category_id=${encodeURIComponent(categoryId)}`)
+      fetch(`/ajax/fetch-subcategories?category_id=${encodeURIComponent(categoryId)}`)
         .then(response => {
           if (!response.ok) {
             throw new Error('Failed to fetch subcategories');

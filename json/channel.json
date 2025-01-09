@@ -1,32 +1,149 @@
 {
     "1": {
         "name": "Light Up Ambience",
+        "channel_unique_id": "UCq7ctxkWd26rYXN4yv7mNTQ",
+        "handle": "@lightup.tv_ambience",
         "channel_type": "Sounds",
-        "handle": "lightup.tv_ambience",
         "channel_description": "Welcome to Light Up Ambience channel, where you\u2019ll find calming ambience videos with soothing sounds designed to help you relax, meditate, sleep, or focus while working. If you need a peaceful backdrop for your day or a serene escape, don't hesitate to search my channel for the perfect atmosphere to ease your mind and body."
     },
     "2": {
         "name": "Rhythmic Retreat",
+        "channel_unique_id": "UCm9ic4v-lWQDawpZuIasbKQ",
+        "handle": "@rhythmicretreat",
         "channel_type": "Sounds",
-        "handle": "RhythmicRetreat",
         "channel_description": "Nature sounds, meditaion sounds, soft music."
     },
     "3": {
         "name": "Relaxing Sounds Natural",
+        "channel_unique_id": "UCc_A-zGtwsBoLvVh6gGni-g",
+        "handle": "@relaxingsoundsnatural74",
         "channel_type": "Sounds",
-        "handle": "RelaxingSoundsNatural74",
         "channel_description": "Relaxing sounds, Nature sounds, jazz music."
     },
     "4": {
         "name": "Carros Show",
+        "channel_unique_id": "",
+        "handle": "@carrosshow",
         "channel_type": "",
-        "handle": "carrosshow",
         "channel_description": ""
     },
     "5": {
-        "name": "PinkVEVO",
+        "name": "whitneyhoustonVEVO",
+        "channel_unique_id": "UCG5fkJ8-2b2ZjWpVNpr7Dqg",
+        "handle": "@whitneyhoustonvevo",
         "channel_type": "",
-        "handle": "pinkvevo",
+        "channel_description": ""
+    },
+    "6": {
+        "name": "CelineDionVEVO",
+        "channel_unique_id": "UCh6C5LG14uZKmwCgGxf-nDQ",
+        "handle": "@celinedionvevo",
+        "channel_type": "",
+        "channel_description": ""
+    },
+    "7": {
+        "name": "MariahCareyVEVO",
+        "channel_unique_id": "UClS0wn3LPs9jdX_yt2g1k8w",
+        "handle": "@mariahcareyvevo",
+        "channel_type": "",
+        "channel_description": ""
+    },
+    "8": {
+        "name": "ShaniaTwainVEVO",
+        "channel_unique_id": "UCGD9Vd6tEBkmM0hArMjgu3w",
+        "handle": "@shaniatwainvevo",
+        "channel_type": "",
+        "channel_description": ""
+    },
+    "9": {
+        "name": "ToniBraxtonVEVO",
+        "channel_unique_id": "UC77dnp1YMeOAMZadv-9KvEQ",
+        "handle": "@tonibraxtonvevo",
+        "channel_type": "",
+        "channel_description": ""
+    },
+    "10": {
+        "name": "MichaelBoltonVEVO",
+        "channel_unique_id": "UCJj7pGCNrd2ww5L_Vhnko-A",
+        "handle": "@michaelboltonvevo",
+        "channel_type": "",
+        "channel_description": ""
+    },
+    "11": {
+        "name": "RichardMarxVEVO",
+        "channel_unique_id": "UCG6CoWyzGCZDf-DEwynyxtA",
+        "handle": "@richardmarxvevo",
+        "channel_type": "",
+        "channel_description": ""
+    },
+    "12": {
+        "name": "kellyclarksonVEVO",
+        "channel_unique_id": "UC6QdZ-5j9t_836_xJPAaRSw",
+        "handle": "@kellyclarksonvevo",
+        "channel_type": "",
+        "channel_description": ""
+    },
+    "13": {
+        "name": "DionneWarwickVEVO",
+        "channel_unique_id": "UCvnZ4quyd4nRvX_C-pfxTzQ",
+        "handle": "@dionnewarwickvevo",
+        "channel_type": "",
+        "channel_description": ""
+    },
+    "14": {
+        "name": "ChrisDeBurghVEVO",
+        "channel_unique_id": "UCqYzZ1w23a1tQuNIXpIxPLw",
+        "handle": "@chrisdeburghvevo",
+        "channel_type": "",
+        "channel_description": ""
+    },
+    "15": {
+        "name": "Music Szn",
+        "channel_unique_id": "UCmYu6e7kVjpHBT4zXzo1Hbg",
+        "handle": "@music_szn",
+        "channel_type": "",
+        "channel_description": ""
+    },
+    "16": {
+        "name": "michaeljacksonVEVO",
+        "channel_unique_id": "UCulYu1HEIa7f70L2lYZWHOw",
+        "handle": "@michaeljacksonvevo",
+        "channel_type": "",
+        "channel_description": ""
+    },
+    "17": {
+        "name": "BritneySpearsVEVO",
+        "channel_unique_id": "UCZijND2e2tPp2AQL8Go2YSg",
+        "handle": "@britneyspearsvevo",
+        "channel_type": "",
+        "channel_description": ""
+    },
+    "18": {
+        "name": "Madonna",
+        "channel_unique_id": "UC81VD6eeuLLSfyY_D-N8sVw",
+        "handle": "@madonna",
+        "channel_type": "",
+        "channel_description": ""
+    },
+    "19": {
+        "name": "hayley teal",
+        "channel_unique_id": "UCPpuWHGEy8QcacmCFjbY_Kg",
+        "handle": "@hayleyteal",
+        "channel_type": "",
+        "channel_description": ""
+    },
+    "20": {
+        "name": "Light Up Music",
+        "channel_unique_id": "UCJBFznyqb68IUmzYZL0S99Q",
+        "handle": "@lightup.tv_music",
+        "channel_type": "",
+        "channel_description": ""
+    },
+    "21": {
+        "name": "AbbaVEVO",
+        "channel_unique_id": "UCa_4DcdTB9QfK0LY9-7qWuQ",
+        "handle": "@abbavevo",
+        "channel_type": "",
         "channel_description": ""
     }
 }

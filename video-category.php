@@ -108,7 +108,7 @@ if (!file_exists($contentFile)) {
                 continue;
             }
             $videoDetails = json_decode(file_get_contents($videoFile), true);
-            $description = trimDescription($videoDetails['description'] ?? '', 150);
+            $description = trimDescription($videoDetails['meta_description'] ?? '', 150);
 
             // Determine the video image
             $videoImage = !empty($videoDetails['thumbnail']) 

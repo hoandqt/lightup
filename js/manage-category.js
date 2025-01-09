@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', function () {
     e.preventDefault();
     const formData = new FormData(this);
 
-    fetch('category-action', {
+    fetch('/ajax/category-action', {
       method: 'POST',
       body: formData
     })
@@ -137,7 +137,7 @@ document.addEventListener('DOMContentLoaded', function () {
   // Confirm delete action
   confirmDeleteCategoryButton.addEventListener('click', () => {
     if (categoryIdToDelete) {
-      fetch(`category-action?action=delete&id=${categoryIdToDelete}`, {
+      fetch(`/ajax/category-action?action=delete&id=${categoryIdToDelete}`, {
         method: 'POST'
       })
         .then(response => response.json())

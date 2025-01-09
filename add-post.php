@@ -82,7 +82,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $thumbnailContent = file_get_contents($youtubeThumbnailUrl); // Download the youtube thumbnail
             if ($thumbnailContent) {
                 $thumbnailExtension = pathinfo(parse_url($youtubeThumbnailUrl, PHP_URL_PATH), PATHINFO_EXTENSION);
-                $thumbnailPath = $postDir . 'thumbnail_youtube.' . $thumbnailExtension;
+                $thumbnailPath = $postDir . 'thumbnail.' . $thumbnailExtension;
                 file_put_contents($thumbnailPath, $thumbnailContent); // Save thumbnail onto the server
             }
         }
@@ -247,11 +247,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </button>
             <p id="metadata-loading" class="text-gray-400 hidden">Generating metadata...</p>
         </div>
-        <script>
-            const script = document.createElement('script');
-            script.src = `/js/generate-metadata.js?v=${Math.floor(Math.random() * 10000)}`;
-            document.head.appendChild(script);
-        </script>
 
         <!-- Meta Title -->
         <div>
@@ -305,6 +300,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         <!-- Submit Button -->
         <div>
+            <input name="type" id="type" value="post" type="hidden">
             <button type="submit" 
                 class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
                 Save Post

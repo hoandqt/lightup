@@ -68,10 +68,21 @@ $pageTitle = htmlspecialchars($videoData['meta_title'] ?: $videoData['title']);
 $pageDescription = htmlspecialchars($videoData['meta_description']);
 $pageKeywords = htmlspecialchars($videoData['meta_keywords']);
 $ogImageURL = $videoData['thumbnail'] ? "https://lightup.tv/item-data/" . $videoData['unique_id'] . "/" . $videoData['thumbnail'] : '';
-$ogImageAlt = $videoData['og_image_alt'] ? $videoData['og_image_alt']: '';
+$ogImageAlt = (isset($videoData['og_image_alt']) && !empty($videoData['og_image_alt'])) ? $videoData['og_image_alt']: '';
 $canonicalURL = $alias
   ? "https://lightup.tv/video/{$alias}"
   : "https://lightup.tv/video?id={$videoData['unique_id']}";
+
+// Check video visibility
+$privateVideo = false;
+if (isset($videoData['visibility']) && $videoData['visibility'] === 'private') {
+  $pageTitle = "Private Video | " . $siteName;
+  $pageDescription = "Private video";
+  $pageKeywords = "";
+  $ogImageURL = "";
+  $ogImageAlt = "";
+  $privateVideo = true;
+}
 
 include 'header.php';
 include 'menu.php';
@@ -80,14 +91,30 @@ include 'sub-heading.php';
 
 <div class="<?php echo $mainContainerClass ?>">
   <div class="flex items-center">
-    <!-- Breadcrumb -->
     <?php 
-      $contentTitle = $videoData['title'];
-      include 'breadcrumb.php' 
+      if ($privateVideo) {
+        $contentTitle = "Private Video";
+      }
+      else {
+        $contentTitle = $videoData['title'];
+        include 'breadcrumb.php';
+      }
     ?>
 
+    <?php if ($privateVideo): ?>
+      <div class='site-notification w-full text-center text-yellow-500 warning'>This video is private and cannot be viewed at this time.</div>
+    <?php endif; ?>
+
     <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>
-      <div class="relative top-0 right-0 ml-auto">
+      <?php 
+        if ($privateVideo) {
+          $dropDownClass = "absolute right-10";
+        }
+        else {
+          $dropDownClass = "relative top-0 right-0 ml-auto";
+        }
+      ?>
+      <div class="<?= $dropDownClass ?>">
         <button id="dropdownButton" class="px-4 py-1 bg-gray-700 text-white rounded hover:bg-gray-600 focus:outline-none">
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
             class="size-6 inline-block h-5">
@@ -107,6 +134,8 @@ include 'sub-heading.php';
       </div>
     <?php endif; ?>
   </div>
+
+  <?php if (!$privateVideo) :?>
 
   <div class="grid grid-cols-1 lg:grid-cols-10 gap-8 mt-6">
     <!-- First Column -->
@@ -317,6 +346,9 @@ include 'sub-heading.php';
       <?php endif; ?>
     </div>
   </div>
+
+  <?php endif; ?>
+
 </div>
 
 <?php if (isset($_SESSION['role']) && $_SESSION['role'] === 'admin'): ?>

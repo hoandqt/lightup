@@ -32,10 +32,11 @@ Disallow: /json/
 Disallow: /README.txt
 Disallow: /web.config
 # Paths (clean URLs)
-Disallow: /lightup-web/*
-Disallow: /dev-1/*
+Disallow: /videos?page=
+Disallow: /blogs?page=
 Disallow: /admin/
 Disallow: /comment/reply/
+Disallow: /search
 Disallow: /search/
 Disallow: /login
 Disallow: /logout

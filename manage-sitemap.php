@@ -174,7 +174,7 @@ include 'sub-heading.php';
 
         const newEntry = { path, priority };
 
-        fetch('add-xml-entry', {
+        fetch('/ajax/add-xml-entry', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(newEntry)
@@ -204,7 +204,7 @@ include 'sub-heading.php';
 
     // Refresh table function
     function refreshTable() {
-        fetch('get-sitemap-entries')
+        fetch('/ajax/get-sitemap-entries')
             .then(response => response.text())
             .then(html => {
                 document.querySelector('#sitemapTable tbody').innerHTML = html;
@@ -257,7 +257,7 @@ include 'sub-heading.php';
         const newPath = document.getElementById('editPath').value;
         const newPriority = document.getElementById('editPriority').value;
 
-        fetch('edit-xml-entry', {
+        fetch('/ajax/edit-xml-entry', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ oldPath: currentEditingPath, newPath, priority: newPriority })
@@ -275,7 +275,7 @@ include 'sub-heading.php';
 
     // Handle Delete Confirmation
     document.getElementById('confirmDeleteButton').addEventListener('click', function () {
-        fetch('delete-xml-entry', {
+        fetch('/ajax/delete-xml-entry', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ id: currentDeletingPath }) // Match with PHP key
@@ -338,7 +338,7 @@ include 'sub-heading.php';
                                 const priority = source.includes('content.json') ? '0.7' : '0.6';
 
                                 // Check and update sitemap
-                                return fetch('add-xml-entry', {
+                                return fetch('/ajax/add-xml-entry', {
                                     method: 'POST',
                                     headers: { 'Content-Type': 'application/json' },
                                     body: JSON.stringify({

@@ -32,9 +32,24 @@ $channels = file_exists($channelFile) ? json_decode(file_get_contents($channelFi
 $categoryFile = __DIR__ . '/json/video-category.json';
 $categories = file_exists($categoryFile) ? json_decode(file_get_contents($categoryFile), true) : [];
 
+$videoData['visibility'] = $videoData['visibility'] ?? 'public'; // Default to 'public' if not set
+$originalPlaylistIds = $videoData['playlist'];
+
 // Handle form submission to update the video details
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $_SESSION['notification'] = '';
+
     $videoData['channel'] = $_POST['channel'];
+    $postPlaylistIds = [];
+    foreach ($_POST as $key => $value) {
+        if (strpos($key, 'playlist-') === 0) {
+            $postPlaylistIds[] = htmlspecialchars($value);
+        }
+    }
+    if (!empty($_POST['playlist'])) {
+        $postPlaylistIds[] = $_POST['playlist'];
+    }
+    $videoData['playlist'] = array_values(array_filter(array_unique($postPlaylistIds)));
     $videoData['title'] = $_POST['title'];
     $videoData['description'] = $_POST['description'];
     $videoData['tags'] = formatCommaSeparatedInput($_POST['tags']);
@@ -48,10 +63,41 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $videoData['category'] = $_POST['category'];
     $videoData['subcategory'] = $_POST['subcategory'];
     $videoData['notes'] = $_POST['notes'];
+    $videoData['visibility'] = $_POST['visibility'];
     $videoData['updated_date'] = date('Y-m-d H:i:s');
 
+    // Add video to playlist
+    foreach ($videoData['playlist'] as $playlistId) {
+        $addVideoToPlaylist = addVideoToPlaylist($playlistId, $videoData['unique_id']);
+        //debugLog('$addVideoToPlaylist: ' . json_encode($addVideoToPlaylist));
+        if ($addVideoToPlaylist['success']) {
+            $_SESSION['notification'] .=  "<div class='site-notification text-green-500 success'>{$addVideoToPlaylist['message']}</div>";
+        }
+        else {
+            $_SESSION['notification'] .=  "<div class='site-notification text-red-500 error'>{$addVideoToPlaylist['message']}</div>";
+        }
+    }
+
+    // Remove video from playlist
+
+    // Find removed playlist IDs
+    $removedPlaylistIds = array_filter(array_diff($originalPlaylistIds, $videoData['playlist']));
+
+    // Remove entries in the JSON for the removed playlist IDs
+    if (!empty($removedPlaylistIds)) {
+        foreach ($removedPlaylistIds as $removedPlaylistId) {
+            $removeVideoFromPlaylist = removeVideoFromPlaylist($removedPlaylistId, $videoData['unique_id']);
+            //debugLog('$removeVideoFromPlaylist: ' . json_encode($removeVideoFromPlaylist));
+            if ($removeVideoFromPlaylist['success']) {
+                $_SESSION['notification'] .= "<div class='site-notification text-yellow-500 warning'>{$removeVideoFromPlaylist['message']}</div>";
+            } else {
+                $_SESSION['notification'] .= "<div class='site-notification text-red-500 error'>{$removeVideoFromPlaylist['message']}</div>";
+            }
+        }
+    }
+
     // Update alias if the title changes
-    $videoData['alias'] = strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $videoData['title']), '-'));
+    $videoData['alias'] = generateAlias($videoData['title']);
 
     // Handle new thumbnail upload or remote image download
     if (!empty($_FILES['thumbnail']['name'])) {
@@ -142,10 +188,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Update or create content.json
     $content = file_exists($contentFile) ? json_decode(file_get_contents($contentFile), true) : [];
     $content[$uniqueId] = [
+        'id' => $videoData['id'],
         'unique_id' => $uniqueId,
         'posted_date' => $postedDate,
-        'updated_date' => $videoData['updated_date'],
-        'category' => $videoData['category']
+        'updated_date' => date('Y-m-d H:i:s'),
+        'category' => $videoData['category'],
+        'visibility' => $videoData['visibility']
     ];
     file_put_contents($contentFile, json_encode($content, JSON_PRETTY_PRINT));
 
@@ -155,7 +203,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     // Set the success message in the session
-    $_SESSION['notification'] = "<div class='site-notification text-green-500 success'>Video information updated successfully!</div>";
+    $_SESSION['notification'] .= "<div class='site-notification text-green-500 success'>Video information updated successfully!</div>";
     
     // Redirect to the video page using the unique ID
     $redirectUrl = '/video.php?id=' . urlencode($uniqueId);
@@ -186,19 +234,23 @@ if (!file_exists($jsonFilePath)) {
 }
 ?>
 
-
 <script>
-    const script1 = document.createElement('script');
-    script1.src = `/js/generate-metadata.js?v=${Math.floor(Math.random() * 10000)}`;
-    document.head.appendChild(script1);
-
     const script2 = document.createElement('script');
     script2.src = `/js/re-generate.js?v=${Math.floor(Math.random() * 10000)}`;
     document.head.appendChild(script2);
 </script>
 
 <div class="container mx-auto p-8">
-  <h1 class="text-3xl font-bold text-text-light mb-6">Edit Video Details</h1>
+    <h1 class="text-3xl flex items-center w-full font-bold text-text-light mb-6">Edit Video Details 
+        <div class="view scale-75">
+            <a href="/video/<?= $videoData['alias'] ?>" target="_blank" class="inline-flex items-center gap-2">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="size-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M13.19 8.688a4.5 4.5 0 0 1 1.242 7.244l-4.5 4.5a4.5 4.5 0 0 1-6.364-6.364l1.757-1.757m13.35-.622 1.757-1.757a4.5 4.5 0 0 0-6.364-6.364l-4.5 4.5a4.5 4.5 0 0 0 1.242 7.244" />
+                </svg>
+                View 
+            </a>
+        </div>
+    </h1>
 
   <form action="" method="POST" enctype="multipart/form-data" class="bg-gray-800 shadow-lg rounded-lg p-6 space-y-6">
   
@@ -215,13 +267,37 @@ if (!file_exists($jsonFilePath)) {
         </select>
     </div>
 
+    <!-- Playlist -->
+    <div class="relative">
+        <label for="playlist" class="block text-sm font-medium text-text-light">Video Playlist</label>
+        <?php if (!empty($videoData['playlist'])): ?>
+            <?php foreach ($videoData['playlist'] as $index => $playlistId): ?>
+                <?php if (!empty($playlistId)): ?>
+                    <input type="text" name="playlist-<?php echo $index ?>" id="playlist-<?php echo $index ?>"
+                        class="mt-1 block w-full border-gray-600 bg-gray-700 text-text-light rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm p-2" 
+                        value="<?= htmlspecialchars($playlistId) ?>">
+                <?php endif; ?>
+            <?php endforeach; ?>
+        <?php endif; ?>
+        <input type="text" name="playlist" id="playlist" 
+            class="mt-1 block w-full border-gray-600 bg-gray-700 text-text-light rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm p-2" 
+            value="">
+        <div id="playlist-dropdown" class="absolute w-96 bg-gray-800 text-white rounded shadow-lg z-20 top-16 hidden"></div>
+        <div class="selected-content pt-4 hidden"></div>
+
+        <button type="button" onclick="viewPlaylist('<?= htmlspecialchars($playlistId) ?>')" 
+        class="px-4 py-2 mt-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700">
+          Add Playlist
+        </button> 
+    </div>
+
     <!-- Video Link -->
     <div>
         <label for="video_link" class="block text-sm font-medium text-text-light">Video Link</label>
         <input type="url" name="video_link" id="video_link" required 
             class="mt-1 block w-full border-gray-600 bg-gray-700 text-text-light rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm p-2" 
             value="<?= htmlspecialchars($videoData['video_link']) ?>">
-        <button type="button" onclick="fetchYouTubeDetails()" 
+        <button type="button" onclick="fetchYouTubeDetails(1)" 
         class="px-4 py-2 mt-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700">
             Fetch Details
         </button>
@@ -255,7 +331,7 @@ if (!file_exists($jsonFilePath)) {
                 <div class='thumbnail-section'>
                     <label for='thumbnail' class='block text-sm font-medium text-text-light'>Thumbnail Image (Current use: Local)</label>
                     <img src='$thumbnailPath' alt='Thumbnail' class='w-48 mt-2 mb-2 rounded'>
-                    <button type='button' onclick='deleteThumbnail(\"".$uniqueId."\")' class='px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700'>
+                    <button type='button' onclick='deleteThumbnail(\"".$uniqueId."\",\"video\")' class='px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700'>
                         Delete Thumbnail
                     </button>
                     <span id='generateAltBtn' class='generate-image-alt inline-block cursor-pointer px-4 py-2 mt-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700' img-src-data='$fullThumbnailPath'>Generate Image Alt</span>
@@ -358,6 +434,10 @@ if (!file_exists($jsonFilePath)) {
             class="px-4 py-2 mt-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700">
             Generate Metadata
         </button>
+        <div class="inline-flex items-center justify-center ml-2">
+            <input id="inlcude_content" type="checkbox" checked class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+            <label for="inlcude_content" class="ms-2 text-sm font-medium">Include content</label>
+        </div>
         <p id="metadata-loading" class="text-gray-400 hidden">Generating metadata...</p>
     </div>
 
@@ -412,6 +492,17 @@ if (!file_exists($jsonFilePath)) {
         class="mt-1 block w-full border-gray-600 bg-gray-700 text-text-light rounded-md p-2"><?= htmlspecialchars($videoData['notes']) ?></textarea>
     </div>
 
+    <!-- Video Visibility -->
+    <div>
+        <label for="visibility" class="block text-sm font-medium text-text-light">Visibility</label>
+        <select name="visibility" id="visibility" required
+            class="mt-1 block w-full border-gray-600 bg-gray-700 text-text-light rounded-md p-2">
+            <option value="public" <?= $videoData['visibility'] === 'public' ? 'selected' : '' ?>>Public</option>
+            <option value="unlisted" <?= $videoData['visibility'] === 'unlisted' ? 'selected' : '' ?>>Unlisted</option>
+            <option value="private" <?= $videoData['visibility'] === 'private' ? 'selected' : '' ?>>Private</option>
+        </select>
+    </div>
+
     <!-- Additional Files -->
     <div>
             <label class="block text-sm font-medium text-text-light">Additional Files</label>
@@ -436,6 +527,7 @@ if (!file_exists($jsonFilePath)) {
 
     <!-- Submit -->
     <div>
+      <input name="type" id="type" value="video" type="hidden">  
       <button type="submit" class="w-full py-2 px-4 bg-indigo-600 text-white rounded-md hover:bg-indigo-700">
         Save Changes
       </button>
